@@ -1,0 +1,7 @@
+$designations = UserType::whereIn('id', ['1', '2', '3', '4', '6', '7'])->get();
+
+<!-- এটা কালেকশন মোডিফাই করার জন্য ব্যবহার হয় /
+এখানে আমি main  কালেকশন এর সাথে এক্সট্রা টেক্সট (PMU) অ্যাড করেছি / -->
+
+$designations->transform(function ($item) { if ($item->id == 1 || $item->id == 2 || $item->id == 3
+|| $item->id == 4) { $item->name .= "(pmu)"; } return $item; });
