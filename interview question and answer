@@ -1,1 +1,535 @@
+What is dependency injection with an example?
+https://www.tutorialspoint.com/what-is-dependency-injection-in-php#:~:text=Dependency%20injection%20is%20a%20procedure,at%20runtime%20and%20compile%20time.
+
+https://medium.com/legacybeta/understanding-dependency-injection-in-laravel-a29d98db093b
+
+What is class in oop?
+Ans: In object-oriented programming (OOP), a class is a blueprint or a template for creating objects. 
+What is an object in oop?
+Ans: In object-oriented programming (OOP), an object is an instance of a class.
+All OOP concepts with examples?
+
+Object-oriented programming (OOP) is a programming paradigm that uses objects – instances of classes – to organize and structure code. PHP is a versatile scripting language that supports OOP features. Here are the main OOP concepts with examples in PHP:
+
+Class:
+A class is a blueprint for creating objects.
+
+
+class Car {
+    // Properties
+    public $brand;
+    public $model;
+
+    // Methods
+    public function startEngine() {
+        echo "Engine started!";
+    }
+}
+
+
+Object:
+An object is an instance of a class.
+
+$myCar = new Car();
+$myCar->brand = "Toyota";
+$myCar->model = "Camry";
+$myCar->startEngine();  // Output: Engine started!
+
+Encapsulation:
+Encapsulation is the bundling of data and methods that operate on the data within a single unit.
+
+class BankAccount {
+    private $balance;
+
+    public function deposit($amount) {
+        $this->balance += $amount;
+    }
+
+    public function getBalance() {
+        return $this->balance;
+    }
+}
+
+Inheritance:
+Inheritance allows a class to inherit properties and methods from another class.
+
+class SportsCar extends Car {
+    public function turboCharge() {
+        echo "Turbo charged!";
+    }
+}
+
+$mySportsCar = new SportsCar();
+$mySportsCar->brand = "Ferrari";
+$mySportsCar->model = "488 GTB";
+$mySportsCar->startEngine();  // Output: Engine started!
+$mySportsCar->turboCharge();  // Output: Turbo charged!
+
+Polymorphism:
+Polymorphism allows objects to be treated as instances of their parent class.
+
+class Circle {
+    public function calculateArea() {
+        // Calculation logic for circle area
+    }
+}
+
+class Square {
+    public function calculateArea() {
+        // Calculation logic for square area
+    }
+}
+
+function printArea($shape) {
+    echo $shape->calculateArea();
+}
+
+$circle = new Circle();
+$square = new Square();
+
+printArea($circle);
+printArea($square);
+
+Abstraction:
+Abstraction involves hiding the implementation details and showing only the necessary features of an object.
+
+abstract class Shape {
+    abstract public function calculateArea();
+}
+
+class Circle extends Shape {
+    public function calculateArea() {
+        // Calculation logic for circle area
+    }
+}
+
+class Square extends Shape {
+    public function calculateArea() {
+        // Calculation logic for square area
+    }
+}
+
+Interface:
+An interface is a contract that defines a set of methods that a class must implement.
+
+interface Logger {
+    public function log($message);
+}
+
+class FileLogger implements Logger {
+    public function log($message) {
+        // Log to a file
+    }
+}
+
+class DatabaseLogger implements Logger {
+    public function log($message) {
+        // Log to a database
+    }
+}
+
+
+
+Function overloading & overriding in PHP with example?
+
+In PHP, function overloading and overriding are concepts related to object-oriented programming (OOP). Let's discuss each concept with examples:
+
+Function Overloading:
+Function overloading allows a class to have multiple methods with the same name but different parameters. However, PHP does not support native function overloading like some other programming languages. In PHP, you can simulate function overloading using default parameter values and variable-length argument lists.
+
+class OverloadingExample {
+    public function add($a, $b = null, $c = null) {
+        if ($b === null) {
+            return $a;
+        } elseif ($c === null) {
+            return $a + $b;
+        } else {
+            return $a + $b + $c;
+        }
+    }
+}
+
+$obj = new OverloadingExample();
+
+echo $obj->add(2);        // Output: 2
+echo $obj->add(2, 3);     // Output: 5
+echo $obj->add(2, 3, 4);  // Output: 9
+In the above example, the add method has different implementations based on the number of parameters passed.
+
+Function Overriding:
+Function overriding occurs when a subclass provides a specific implementation for a method that is already defined in its parent class. To override a method, the subclass method must have the same signature (name and parameters) as the parent class method.
+
+class Animal {
+    public function makeSound() {
+        return "Generic Animal Sound";
+    }
+}
+
+class Cat extends Animal {
+    public function makeSound() {
+        return "Meow";
+    }
+}
+
+class Dog extends Animal {
+    public function makeSound() {
+        return "Woof";
+    }
+}
+
+$animal = new Animal();
+$cat = new Cat();
+$dog = new Dog();
+
+echo $animal->makeSound();  // Output: Generic Animal Sound
+echo $cat->makeSound();     // Output: Meow
+echo $dog->makeSound();     // Output: Woof
+
+
+What is an abstract class with examples?
+
+Abstract classes and methods are when the parent class has a named method, but need its child class(es) to fill out the tasks.
+
+An abstract class is a class that contains at least one abstract method. An abstract method is a method that is declared, but not implemented in the code.
+
+Here's an example of an abstract class in PHP:
+
+<?php
+
+// Define an abstract class
+abstract class Shape {
+    protected $color;
+
+    // Constructor
+    public function __construct($color = 'red') {
+        $this->color = $color;
+    }
+
+    // Abstract method that must be implemented by subclasses
+    abstract public function getArea();
+
+    // Concrete method
+    public function getColor() {
+        return $this->color;
+    }
+}
+
+// Subclass extending the abstract class
+class Circle extends Shape {
+    protected $radius;
+
+    // Constructor
+    public function __construct($radius, $color = 'blue') {
+        parent::__construct($color);
+        $this->radius = $radius;
+    }
+
+    // Implementation of the abstract method
+    public function getArea() {
+        return pi() * $this->radius * $this->radius;
+    }
+}
+
+// Subclass extending the abstract class
+class Square extends Shape {
+    protected $side;
+
+    // Constructor
+    public function __construct($side, $color = 'green') {
+        parent::__construct($color);
+        $this->side = $side;
+    }
+
+    // Implementation of the abstract method
+    public function getArea() {
+        return $this->side * $this->side;
+    }
+}
+
+// Instantiate objects
+$circle = new Circle(5);
+$square = new Square(4);
+
+// Call methods
+echo "Circle Area: " . $circle->getArea() . "\n";
+echo "Circle Color: " . $circle->getColor() . "\n";
+
+echo "Square Area: " . $square->getArea() . "\n";
+echo "Square Color: " . $square->getColor() . "\n";
+
+?>
+
+What is the interface in php?
+
+
+Interfaces allow you to specify what methods a class should implement.
+
+Interfaces make it easy to use a variety of different classes in the same way. When one or more classes use the same interface, it is referred to as "polymorphism".
+
+Interfaces are declared with the interface keyword:
+
+<?php
+// Interface definition
+interface Animal {
+  public function makeSound();
+}
+
+// Class definitions
+class Cat implements Animal {
+  public function makeSound() {
+    echo " Meow ";
+  }
+}
+
+class Dog implements Animal {
+  public function makeSound() {
+    echo " Bark ";
+  }
+}
+
+class Mouse implements Animal {
+  public function makeSound() {
+    echo " Squeak ";
+  }
+}
+
+// Create a list of animals
+$cat = new Cat();
+$dog = new Dog();
+$mouse = new Mouse();
+$animals = array($cat, $dog, $mouse);
+
+// Tell the animals to make a sound
+foreach($animals as $animal) {
+  $animal->makeSound();
+}
+?>
+
+Access modifier?
+
+Properties and methods can have access modifiers which control where they can be accessed.
+
+There are three access modifiers:
+
+public - the property or method can be accessed from everywhere. This is default
+protected - the property or method can be accessed within the class and by classes derived from that class. Can be access from child class.
+private - the property or method can ONLY be accessed within the class
+
+Traits in php?
+
+PHP only supports single inheritance: a child class can inherit only from one single parent.
+
+So, what if a class needs to inherit multiple behaviors? OOP traits solve this problem.
+
+Traits are used to declare methods that can be used in multiple classes. Traits can have methods and abstract methods that can be used in multiple classes, and the methods can have any access modifier (public, private, or protected).
+
+<?php
+trait message1 {
+  public function msg1() {
+    echo "OOP is fun! ";
+  }
+}
+
+trait message2 {
+  public function msg2() {
+    echo "OOP reduces code duplication!";
+  }
+}
+
+class Welcome {
+  use message1;
+}
+
+class Welcome2 {
+  use message1, message2;
+}
+
+$obj = new Welcome();
+$obj->msg1();
+echo "<br>";
+
+$obj2 = new Welcome2();
+$obj2->msg1();
+$obj2->msg2();
+?>
+
+
+Static method & property?
+
+A class can have both static and non-static methods. A static method can be accessed from a method in the same class using the self keyword and double colon (::):
+
+Static Properties:
+
+class MyClass {
+    public static $staticProperty = 0;
+
+    public function incrementStaticProperty() {
+        self::$staticProperty++;
+    }
+}
+
+// Accessing static property
+echo MyClass::$staticProperty; // Output: 0
+
+// Creating instances and modifying static property
+$obj1 = new MyClass();
+$obj1->incrementStaticProperty();
+echo MyClass::$staticProperty; // Output: 1
+
+$obj2 = new MyClass();
+$obj2->incrementStaticProperty();
+echo MyClass::$staticProperty; // Output: 2
+
+Static Methods:
+
+class MathOperations {
+    public static function add($a, $b) {
+        return $a + $b;
+    }
+}
+
+// Calling a static method
+$result = MathOperations::add(5, 3);
+echo $result; // Output: 8
+
+Magic method in php?
+
+In PHP, magic methods are special methods that begin with a double underscore (__). These methods are automatically called by the PHP interpreter in certain situations. Magic methods allow you to implement functionality in your classes that is triggered by specific events or actions. Here are some commonly used magic methods in PHP:
+
+__construct: This method is called when an object is created. It is commonly used for initializing object properties or performing setup tasks.
+
+class MyClass {
+    public function __construct() {
+        // Constructor logic
+    }
+}
+
+__destruct: This method is called when an object is about to be destroyed. It can be used for cleanup tasks, such as closing database connections or releasing resources.
+
+class MyClass {
+    public function __destruct() {
+        // Destructor logic
+    }
+}
+__get and __set: These methods are called when getting or setting a property that is not accessible or not found in the class.
+
+class MyClass {
+    private $data = [];
+
+    public function __get($name) {
+        return $this->data[$name] ?? null;
+    }
+
+    public function __set($name, $value) {
+        $this->data[$name] = $value;
+    }
+}
+
+__call and __callStatic: These methods are triggered when invoking methods that are not accessible or not found in the class.
+
+class MyClass {
+    public function __call($method, $args) {
+        // Handle method calls dynamically
+    }
+
+    public static function __callStatic($method, $args) {
+        // Handle static method calls dynamically
+    }
+}
+__toString: This method is called when an object is treated as a string.
+
+class MyClass {
+    public function __toString() {
+        return 'This is my object as a string';
+    }
+}
+
+
+Service provider & service container in laravel.
+
+In Laravel, a service provider is a class that binds services into the Laravel service container. The service container is a powerful tool for managing class dependencies and performing dependency injection. Let's explore these concepts in more detail:
+
+Service Provider:
+
+A service provider in Laravel is responsible for registering services and binding them to the container. It serves as a bridge between your application and Laravel's service container. Service providers contain methods such as register and boot that allow you to configure, register, or perform any necessary setup for your application.
+
+Here is a simple example of a service provider:
+
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class MyServiceProvider extends ServiceProvider
+{
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->bind('example', function () {
+            return new \App\Example();
+        });
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+}
+In this example, the register method binds the class Example to the container with the key 'example'. You can then resolve this class from the container using app('example').
+
+Service Container:
+
+The service container in Laravel is a powerful tool for managing class dependencies and performing dependency injection. It allows you to bind classes into the container and resolve them when needed. The container is used throughout the Laravel framework, providing a clean and consistent way to manage class dependencies.
+
+Here is an example of resolving a class from the container:
+
+$exampleInstance = app('example');
+This line resolves the 'example' key from the container, creating an instance of the Example class.
+
+You can also use dependency injection in the constructor of your classes to automatically resolve dependencies from the container:
+
+use App\Example;
+
+class MyController
+{
+    protected $example;
+
+    public function __construct(Example $example)
+    {
+        $this->example = $example;
+    }
+}
+Laravel's service container will automatically resolve and inject the Example class when an instance of MyController is created.
+
+
+
+Feced in laravel?
+
+
+SOLID standard in laravel with example?
+https://medium.com/@eloufirhatim/solid-principles-in-laravel-1418be178346
+
+All design patterns in laravel? Single Tone Pattern
+Event, lissener, Job, Quea in Laravel.
+Custom artisan command
+Laravel life cycle.
+Kernel in laravel.
+Write a unit test case.
+Types of Microservice 
+DRY principle 
+REST Api & SOAp api
+Laravel all authentication passport, JWT 
+
+
+SQL and database design skills (Normalization, Foreign Keys, Indexing, Data Consistency, Data Security, Scalability, Performance Optimization).
 
