@@ -71,6 +71,78 @@ PHP Introduction
         echo $name;    // Error: $name is not accessible outside the function
         ?>
 
+
+##Global Scope : Global Scope বা ভ্যারিয়েবল হলো ,ফাঙ্কশন এর বাহিরে যে কোনো variable কে Global Scope বা Global variable বলে। এটা function ভিতর ছাড়া script যে কোনো জায়গা থেকে এক্সেস করা যায় 
+        <?php
+        $name = "Alice";  // Global variable
+
+        function myFunction() {
+            echo $name;  // Error: Cannot access the global variable directly inside a function
+        }
+
+        myFunction();  // Will produce an error
+        ?>
+
+        **তবে যদি আপনি ওই variable কে ফাঙ্কশন এর ভিতর থেকে এক্সেস করতে চান তাহলে global keyword use করতে হবে নিচে উদাহরণ দেয়া হলো  
+        <?php
+        $name = "Alice";  // Global variable
+        
+        function myFunction() {
+            global $name;  // Use the global keyword to access the global variable
+            echo $name;    // Outputs: Alice
+        }
+        
+        myFunction();
+        ?>
+
+
+### Static Scope : সাধারণত function এর ভিতর কোনো ভ্যারিয়েবল declured করলে , যখন ওই function টা রান হয় এবং শেষ হয় তখন ওই ভ্যারিয়েবল টা তার ভ্যালু delete করে দেয়। কিন্তু যদি variable এর আগে Static অ্যাড করা হয় তখন ওই ভ্যারিয়েবল টা , 
+    function শেষ হলেও ভ্যালু ডিলিট করে না। ওটা রেখে দেয়। এবং পর্বতিটিতে যখন ওই function টা কল হয় তখন ওই ভ্যারিয়েবল টা ওই ভ্যালু টা মনে রাখে।   
+    example:    
+    <?php
+        function myFunction() {
+            $count = 0;  // This is a regular variable
+            $count++;
+            echo $count;
+        }
+
+        myFunction();  // Outputs: 1
+        myFunction();  // Outputs: 1
+        myFunction();  // Outputs: 1
+        ?>
+
+
+        **Simple Example without Static:
+            <?php
+            function myFunction() {
+                $count = 0;  // This is a regular variable
+                $count++;
+                echo $count;
+            }
+
+            myFunction();  // Outputs: 1
+            myFunction();  // Outputs: 1
+            myFunction();  // Outputs: 1
+            ?>
+
+        **Example with Static:  
+            ?php
+            function myFunction() {
+                static $count = 0;  // This is a static variable
+                $count++;
+                echo $count;
+            }
+
+            myFunction();  // Outputs: 1
+            myFunction();  // Outputs: 2
+            myFunction();  // Outputs: 3
+            ?>
+  
+
+      
+         
+
+
     
                     
     
