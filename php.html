@@ -197,6 +197,43 @@ PHP Topices Start.
          
 
 
-    
+                   ******************PHP Data Types***************
+
+### Data Type : Data  type বলতে বুঝায় ,একটা ভ্যারিয়েবল কি ধরণের  type of data (variable ) hold বা ধারণ করে। 
+##### PHP has 8 main data types:
+            String : String হলো একটা sequence of characters (অক্ষরের ক্রম বিনাস।এর মানে হলো প্রত্যেকটা character এর পর  আরেকটা character সাজানো থাকে। যেমন "CAT"   এখানে C A এবং T একটা সিকোয়েন্স মেইনটেইন করে একটার পর একটা রয়েছে। ) 
+                    যেটা নির্দেশ করা টেক্সট। তবে এটা letter এবং digit হতে পারে।   
+                    Characters: Letters (like A, B, C), digits (like 1, 2, 3), and symbols (like @, #, !).   
+                    এটা লেখার জন্য single quotes (') or double quotes (") ব্যবহার করা হয়।  
+
+            Integer: Integer বলতে বুঝায় সমস্ত নাম্বার কে (Negativ এন্ড পসিটিভ )। তবে decimal নম্বর ছাড়া।     
+
+            Float (or Double): Float (or Double) বলতে আমরা decimal নম্বর কে বুঝি। 
+
+            Boolean : Boolean হলো এক ধরণের data Type যেটা true এবং false এই দুই টা state নিয়ে কাজ করে।
+                    true : (এর অর্থ হলো something are correct or  exit ) .
+                    False : (এর অর্থ হলো  something is incorrect or does not exist) .
+
+                    When is Boolean Used?
+                    Boolean সাধারণত ব্যবহার হয় Conditional Statements and Logical Operations এর ক্ষেত্রে। 
+                    Conditional Statements : (like if, else) অর্থাৎ যেহেতু এটা true এবং false নিয়ে কাজ করে সেহেতু  block এর ভিতর কোড টুকু কখন  run hobe এটা নির্ধারণ করে । 
+                    মানে যদি condtion true হয় তখন run করবে other wise করবে না। 
+                    Logical Operations (like &&, ||) to combine or test multiple conditions.
+
+                    besic example : 
+
+                        <?php
+                        $is_raining = true;   // This is a boolean value representing 'true'
+                        $is_sunny = false;    // This is a boolean value representing 'false'
+
+                        if ($is_raining) {
+                            echo "Take an umbrella!";  // This will run because $is_raining is true
+                        }
+
+                        if (!$is_sunny) {
+                            echo "It's not sunny outside.";  // This will run because $is_sunny is false
+                        }
+                        ?>
+
                     
-    
+                
