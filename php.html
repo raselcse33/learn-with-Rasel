@@ -215,7 +215,7 @@ PHP Topices Start.
                     False : (এর অর্থ হলো  something is incorrect or does not exist) .
 
                     When is Boolean Used?
-                    Boolean সাধারণত ব্যবহার হয় Conditional Statements and Logical Operations এর ক্ষেত্রে। 
+                    Boolean সাধারণত ব্যবহার হয় Conditional Statements and Logical and comparison Operations এর ক্ষেত্রে। 
                     Conditional Statements : (like if, else) অর্থাৎ যেহেতু এটা true এবং false নিয়ে কাজ করে সেহেতু  block এর ভিতর কোড টুকু কখন  run hobe এটা নির্ধারণ করে । 
                     মানে যদি condtion true হয় তখন run করবে other wise করবে না। 
                     Logical and comparison Operations (like &&, || , > ,<) to combine or test multiple conditions.
@@ -234,6 +234,63 @@ PHP Topices Start.
                             echo "It's not sunny outside.";  // This will run because $is_sunny is false
                         }
                         ?>
+
+                    Comparisons example :     
+                    <?php
+                    $a = 10;
+                    $b = 5;
+                    
+                    $is_greater = $a > $b;  // Comparison: 10 is greater than 5, so $is_greater is true
+                    echo $is_greater;       // Outputs: 1 (because true is displayed as 1 in PHP)
+                    
+                    $is_equal = $a == $b;   // Comparison: 10 is not equal to 5, so $is_equal is false
+                    echo $is_equal;         // Outputs nothing (because false is displayed as empty in PHP)
+                    ?>
+
+                Type Casting : Type Casting হলো একটা process যার মাধ্যমে value একটা data type থেকে আরেকটা data type convert হয়।    
+                              PHP এমন অনেক ভ্যালু আছে যা automatically Booleans data কনভার্ট হয়। নিচে example দেয়া হলো : 
+
+                              0 (integer zero) and 0.0 (float zero) are false.
+                            Empty strings (""), empty arrays ([]), and null are false.
+                            All other values (non-zero numbers, non-empty strings, non-empty arrays) are true.
+
+                            <?php
+                            $value1 = 0;         // 0 is false
+                            $value2 = "Hello";   // Non-empty string is true
+
+                            if ($value1) {
+                                echo "This is true!";
+                            } else {
+                                echo "This is false!";  // Outputs this because 0 is false
+                            }
+
+                            if ($value2) {
+                                echo "This is true!";  // Outputs this because non-empty strings are true
+                            }
+                            ?>
+                    
+                Array : Array হলো এমন একটা ভ্যারিয়েবল যেখানে  multiple ভ্যালু assign করা যায়। এবং সেই ভ্যালু গুলোকে index এর মাধ্যমে এক্সেস করা যায়।             
+                        example : 
+                        <?php
+                        $fruits = array("Apple", "Banana", "Orange");  // This is an array
+                        echo $fruits[0];  // Outputs: Apple (first item in the array)
+                        ?>
+
+
+                Object : Object হল instance of class . মানে হচ্ছে object হল class এর একটা বাস্তব উদাহরণ। যেমন car যদি একটা class হয় তাহলে এর উদাহরণ বা instance হলো Toyota .   
+                        class : class হল একটা প্ল্যান জাস্ট plan . যেমন (car ,এর color থাকবে ,brand থাকবে একটা প্ল্যান ) .
+                        object : object হল ঐ প্ল্যান বা class  এর একটা real উদাহরণ তৈরী করা। যেমন (car এর color রেড হবে , এবং ব্র্যান্ড টা Toyota হবে ) .
+                        এরকম আরো multiple  উদাহরণ বা object তৈরী করা যায় একটা ক্লাস থেকে । 
+
+                        class Car {
+                            public $color;
+                            public $model;
+                        }
+                        
+                        // Creating an instance of the Car class
+                        $myCar = new Car();  // This is an instance (or object) of the Car class
+                        $myCar->color = "Blue";
+                        $myCar->model = "Honda";
 
                     
                 
