@@ -199,7 +199,7 @@ PHP Topices Start.
 
                    ******************PHP Data Types***************
 
-### Data Type : Data  type বলতে বুঝায় ,একটা ভ্যারিয়েবল কি ধরণের  type of data (variable ) hold বা ধারণ করে। 
+### Data Type : Data  type বলতে বুঝায় ,একটা ভ্যারিয়েবল কি ধরণের  type of data (value ) hold বা ধারণ করে। 
 ##### PHP has 8 main data types:
             String : String হলো একটা sequence of characters (অক্ষরের ক্রম বিনাস।এর মানে হলো প্রত্যেকটা character এর পর  আরেকটা character সাজানো থাকে। যেমন "CAT"   এখানে C A এবং T একটা সিকোয়েন্স মেইনটেইন করে একটার পর একটা রয়েছে। ) 
                     যেটা নির্দেশ করা টেক্সট। তবে এটা letter এবং digit হতে পারে।   
@@ -290,7 +290,27 @@ PHP Topices Start.
                         // Creating an instance of the Car class
                         $myCar = new Car();  // This is an instance (or object) of the Car class
                         $myCar->color = "Blue";
-                        $myCar->model = "Honda";
+                        $myCar->model = "Toyota";
+
+                        $myNewCar = new Car();  // multiple object 
+                        $myNewCar->color = "red";
+                        $myNewCar->model = "Tesla";
+
+
+                NULL: NULL হচ্ছে  একটা special  ভ্যালু যেটা represents করে no-value অথবা empty । তাই কোনো ভ্যারিয়েবল কে null ভ্যালু এসাইন করা মানে হলো ঐ ভ্যারিয়েবল টা empty অথবা স্পষ্টভাবে কোনো ভ্যালু এসাইন করা নাই।সহজ ভাবে বলতে গেলে Declaring without a value . 
+                        তবে এখানে একটা কথা থাকে    
+                            
+                        $car;
+                        $car2 = NULL;
+                        এখানে দুই টা ভেরিএবলে আছে যার প্রথমটা শুধু একটা ভ্যারিয়েবল declured করা আছে যার কোনো ভ্যালু নেই। এবং দ্বিতীয়টা একটা special null ভ্যালু assign করা আছে যার অর্থ এর ও কোনো স্পষ্টভাবে ভ্যালু এসাইন করা নাই।  তাহলে কি দুই টা একই। 
+
+                        $car;
+                        PHP জানে যে $car  কোডে উল্লেখ করা হয়েছে , কিন্তু এটা এখন ও একটা initialized variable এর মত আচরণ করে না। 
+                        initialized variable এর মানে হলো variable টাতে intial ভ্যালু (প্রাথমিক ভাবে বা প্রথম বার যে ভ্যালু  assign করা হয়। )  assign করা হয়েছে। 
+                        মূলকথা হল $car  যেহেতু কোডে লিখা হয়েছে সেহেতু এটা exit করতেসে কিন্তু PHP একে কোনো memory allocation অর্থাৎ memory তে কোনো জায়গা বরাদ্দ রাখে না। 
+
+                        $car2 = NULL
+                        এখানে $car2 variable  একটা special ভ্যালু declured করেছে। এবং এটা  initialized ও হয়েছে  এবং memory allocation হয়েছে তবে সেটা সর্বনিন্ম। 
 
                     
                 
