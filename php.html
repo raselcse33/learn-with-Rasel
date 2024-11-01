@@ -202,7 +202,7 @@ PHP Topices Start.
 ### Data Type : Data  type বলতে বুঝায় ,একটা ভ্যারিয়েবল কি ধরণের  type of data (value ) hold বা ধারণ করে। 
 ##### PHP has 8 main data types:
             String : String হলো একটা sequence of characters (অক্ষরের ক্রম বিনাস।এর মানে হলো প্রত্যেকটা character এর পর  আরেকটা character সাজানো থাকে। যেমন "CAT"   এখানে C A এবং T একটা সিকোয়েন্স মেইনটেইন করে একটার পর একটা রয়েছে। ) 
-                    যেটা নির্দেশ করা টেক্সট। তবে এটা letter এবং digit হতে পারে।   
+                    যেটা Double Quotes (") এবং Single Quotes (') এর ভিতর লিখা হয়।   
                     Characters: Letters (like A, B, C), digits (like 1, 2, 3), and symbols (like @, #, !).   
                     এটা লেখার জন্য single quotes (') or double quotes (") ব্যবহার করা হয়।  
 
@@ -325,7 +325,76 @@ PHP Topices Start.
                      ****************PHP Strings Details***************    
                      
                      
+    এর আগে আমরা string টাইপ নিয়ে আলোচনা হয়েছে। এখানে আমরা string এর ডিটেলস নিয়ে অলোচোনা করবো। 
+    আমরা জানি string টাইপ এর ডাটা বা  ভ্যালু  Double Quotes (") এবং Single Quotes (') এর ভিতর লিখা হয়। তবে লিখা হলেও এই Double Quotes (") এবং Single Quotes (') এর ভিতর রয়েছে পার্থক্য। 
+                     
+        Double Quotes : 
+                     
+            *এর প্রথম যে বৈশিষ্ট সেটা হলো Double Quotes এর ভিতর আমরা ভ্যারিয়েবল লিখতে পারি। এবং সেটা ভ্যারিয়েবল এর মত আচরণ করে।আর এই কথাটাকে ইংলিশ বলে (interpolated) .  একটা উদাহরণ দিলে আরো সহজ হবে। 
+                $name = "John";
+                echo "Hello, $name!"; // Outputs: Hello, John!
+            
+            *এটি অনেক escape sequences সাপোর্ট করে। (escape sequences হল combination  of special character) .
+            
+            *performance এর ক্ষেত্রে এটি Single Quotes এর থেকে slow  ।
+            
+            *Double Quotes এর ভিতর single  Quotes লিখা যায়। 
+                echo "She said, 'Hello!' "; 
+                     
+                     
+                     
+                     
+        Single Quotes (') : 
+                     
+            *এর ভিতর আমরা ভ্যারিয়েবল লিখতে পারি তবে সেটা ভ্যারিয়েবল এর মত আচরণ করে না। সে ওটাকে একটা sequence characters হিসাবে ধরে। যেমন :
+                $name = "John";
+                echo 'Hello, $name!';  // Outputs: Hello, $name!
+            
+            *এখানে লক্ষ করলে দেখা যাবে $name যে একটা ভ্যারিয়েবল এবং এর যে একটা  এসাইন কৃত ভ্যালু আছে, সে কিন্তু ওই ভ্যালু টাকে প্রিন্ট করে নাই।বরং সে নিজেই একটা sequence characters হিসাবে প্রিন্ট হয়েছে। 
+            
+            *এটি মাত্র দুটি escape sequences সাপোর্ট করে। 
+                \' to include a single quote (like in It's),
+                \\ to include a backslash.
+            
+            *performance এর ক্ষেত্রে এটি Double Quotes এর থেকে faster । কারণ এটিতে  interpolation হয় না  এবং escape sequences কম সাপোর্ট করে। 
+            
+            *Single Quotes এর ভিতর Double Quotes লিখা যায়। 
+                echo 'She said, "Hello!"'; 
 
+    ** দুইটা স্ট্রিং কে  '.' দ্বারা concate করা হয়।   
+
+    
+                ********************PHP Constants*************
+    
+##PHP Constant : আমরা জানি যার মধ্যে ভ্যালু assign করা হয় তাকে ভ্যারিয়েবল বলে। PHP Constant : আমরা জানি যার মধ্যে ভ্যালু assign করা হয় তাকে ভ্যারিয়েবল বলে। 
+                   যেমন : $name = "খেলা হবে "; 
+                   এখানে $name একটা ভ্যারিয়েবল যেটা string টাইপ এর ডাটা বা ভ্যালু ধারণ করে।  
+                
+                ঠিক তেমনি  Constant ও হল একটা special variable যার প্রধান বৈশিষ্ট হল এর মধ্যে কোন ভ্যালু একবার ভ্যালু assign করলে এটা আর পরিবর্তন করা যায় না। 
+                নিচে Constant এবং variable নিয়ে আলোচনা করা হল। 
+
+                এটা কে define() অথবা  const দিয়া শুরু করতে হয়। 
+                    উদাহরণ : define("SITE_NAME", "MyWebsite");
+
+                এর মধ্যে একবার ভ্যালু সেট করলে সেটাকে আর changed or redefined করা যায় না । 
+                    উদাহরণ : 
+                    define("PI", 3.14159); 
+                    // Trying to change the value
+                    PI = 3.9; // Error: Cannot reassign a value to a constant
+                    এখানে যেহেতু PI এর ভ্যালু একবার সেট করা হইয়া গেছে সেহেতু আর চেঞ্জ করা যাবে না। 
+
+                    define("GREETING", "Hello, World!"); // Define the constant GREETING
+                    define("GREETING", "Hi, World!"); // Error: GREETING has already been defined
+                    এখানে একবার GREETING define করা হয়ে গেছে সেহেতু পরে আর define করা যাবে না। দুটি উদাহরণ প্রায় একই। 
+
+                এটা uppercase letters দিয়া লিখতে হয়। 
+                নরমাল ভ্যারিয়েবল এর মত এর $ sign দরকার হয় না। 
+
+            PHP তে এরকম অনেক magic constant আছে। যেটা আগে থেকেই predefine করা। নিচে details দেয়া হল 
+            লিঙ্ক : https://www.w3schools.com/php/php_magic_constants.asp
+
+
+                     
 
 
                     
