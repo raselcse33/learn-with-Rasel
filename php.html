@@ -394,6 +394,146 @@ PHP Topices Start.
             লিঙ্ক : https://www.w3schools.com/php/php_magic_constants.asp
 
 
+            ********************PHP Operators*************
+
+            #### PHP তে Operators বলতে বুঝায় কিছু  symbol বা keyword (keyword বলতে এখানে reserve keyword বুঝানো হয়েছে।  যেমন if ,else ইত্যাদি  ). যেটা ব্যবহার হয় variableবা value এর উপর। বিভিন্ন রকম action  ঘটানোর জন্য। 
+            এখানে action বলতে বুঝানো হচ্ছে কিছু একটা করা যেমন : যোগ করা ,comapare করা ,ইত্যাদি।  
+                        
+                    Arithmetic operators (+,  -,  *,  /,  %)
+                    Assignment operators (=, += , -=, *= , /= , %=)
+                    Comparison operators (== , === , < ,> ,!= , <= ,>= ,)
+                    Increment/Decrement operators (++$x , $x++ ,--$x , $x--)
+                    Logical operators(&& , ।। ,!)
+                    String operators (. use to concate string )
+                    Array operators (+ , == , === , != ,)
+                    Conditional assignment operators (Ternary Operator ?:  ,  Null Coalescing Operator ?? )
+                    Null coalescing operator : এই operator টা ব্যবহার হয় যে ভ্যারিয়েবল এর ভ্যালু আছে কিনা চেক করার জন্য। 
+
+
+           **********************PHP if Statements*****************************
+           
+           
+#### PHP IF  statement সাধারণত ব্যবহার করা condtion চেক করার ক্ষেত্রে। condtion যখন true হয়।  তখন ওই condition এর ভিতর code টুকু রান হয়। নিচে উদাহরন দেয়া হল 
+
+        উদাহরণ : 
+        if (condition) {
+            // Code to run if the condition is true
+        }
+
+        একে সংক্ষিপ্ত ভাবে ternary অপারেটর দিয়ে প্রকাশ করা যায়। মোট কথা হল ternary operator হচ্ছে if statement এর  short form যাকে shorthand if বলা হয়। 
+
+        উদাহরণ :
+            $variable = (condition) ? value_if_true : value_if_false;
+        
+            $age = 20;
+            $status = ($age >= 18) ? "adult" : "minor";
+            echo $status; // Outputs: adult    
+
+        একের অধিক condition চেক করার জন্য। if elseif ব্যবহার করা হয়। switch Statement দিয়েও multiple condition check করা হয়। নিচে switch Statement উদাহরণ দেয়া হল।
+
+        উদাহরণ :
+            $fruit = "apple";
+            switch ($fruit) {
+                case "banana":
+                    echo "This is a banana.";
+                    break;
+                case "apple":
+                    echo "This is an apple.";
+                    break;
+                case "orange":
+                    echo "This is an orange.";
+                    break;
+                default:
+                    echo "Unknown fruit.";
+            }
+
+
+
+
+            **********************PHP Loop*****************************
+
+##### Loop : Loop ও এক প্রকার connditional statement .এটি একটি কাজ বা বার বার করে (প্রোগ্রামিং এর ভাষায় : কোড এর একটি নির্দিষ্ট block বার বার excute করে ) যতক্ষণ না condtion টা false হচ্ছে। 
+            php তে চার প্রকার loop আছে , while Loop,do-while Loop,for Loop,foreach Loop
+
+            **while Loop : 
+                $count = 1;
+                while ($count <= 5) {
+                    echo "Count is: $count <br>";
+                    $count++; // Increases $count by 1 each time
+                }
+
+            **do-while Loop : 
+
+                $count = 1;
+                do {
+                    echo "Count is: $count <br>";
+                    $count++;
+                } while ($count <= 5);
+
+                তবে while Loop এবং do-while Loop এর মধ্যে একটা পার্থক্য আছে। সেটা হলো while Loop প্রথমে condition  check করে ,এরপর  condtion true হলে সে ওই কোড টুকু excute করে। 
+                ওপর দিকে  do-while Loop প্রথমে একবার কোড excute করে then condition check করে। 
+
+            **for Loop : 
+                for ($i = 1; $i <= 5; $i++) {
+                    echo "Number: $i <br>";
+                }
+                
+                Step-by-Step Execution
+                Let's go through each iteration to see what happens.
+                
+                First Iteration:
+                
+                Initialization: $i = 1
+                Condition: $i <= 5 (true, since 1 <= 5)
+                Execute Code: echo "Number: 1 <br>"; // Output: Number: 1
+                Increment: $i++ makes $i = 2
+                Second Iteration:
+                
+                Condition: $i <= 5 (true, since 2 <= 5)
+                Execute Code: echo "Number: 2 <br>"; // Output: Number: 2
+                Increment: $i++ makes $i = 3
+                Third Iteration:
+                
+                Condition: $i <= 5 (true, since 3 <= 5)
+                Execute Code: echo "Number: 3 <br>"; // Output: Number: 3
+                Increment: $i++ makes $i = 4
+                Fourth Iteration:
+                
+                Condition: $i <= 5 (true, since 4 <= 5)
+                Execute Code: echo "Number: 4 <br>"; // Output: Number: 4
+                Increment: $i++ makes $i = 5
+                Fifth Iteration:
+                
+                Condition: $i <= 5 (true, since 5 <= 5)
+                Execute Code: echo "Number: 5 <br>"; // Output: Number: 5
+                Increment: $i++ makes $i = 6
+                Sixth Iteration:
+                
+                Condition: $i <= 5 (false, since 6 > 5)
+                Since the condition is now false, the loop stops, and PHP moves on to the next part of the code.
+
+            **foreach Loop : foreach Loop টা specially array ক্ষেত্রে ব্যবহার হয়। এটা দ্বারা array এর প্রতিটা এলিমেন্ট একটা একটা করে access করা যায়      
+
+### Break Statement : Break Statement টা ব্যবহার করা হয় কোনো loop কে তাৎক্ষণিক ভাবে exit বা শেষ করার জন্য ,যদিও লুপ এর condition true . একটা উদাহরণ দিলে আরো ভালো বুঝা যাবে। 
+                    
+
+                    $count = 1;
+
+                    while ($count <= 10) {
+                        echo "Count is: $count <br>";
+                        if ($count == 5) {
+                            break; // Stop the loop when $count is 5
+                        }
+                        $count++;
+                    }
+
+
+                    এখানে while loop টা  $count  এর মান যতক্ষণ , ১০ এর থেকে ছোট বা সমান  থাকবে ততক্ষন ভিতরের কোড টুকু excute করার কথা। 
+                    কিন্তু loop এর ভিতর আরেকটা  condition use করা হয়েছে। যখন ওই condition true হবে তখন break statement  কোড টাকে exit করে দিবে ,যদিও loop এর condition এখনো true ।এটাই হল ব্র্যাক statement কাজ  
+
+                    
+
+
                      
 
 
