@@ -531,7 +531,26 @@ PHP Topices Start.
                     এখানে while loop টা  $count  এর মান যতক্ষণ , ১০ এর থেকে ছোট বা সমান  থাকবে ততক্ষন ভিতরের কোড টুকু excute করার কথা। 
                     কিন্তু loop এর ভিতর আরেকটা  condition use করা হয়েছে। যখন ওই condition true হবে তখন break statement  কোড টাকে exit করে দিবে ,যদিও loop এর condition এখনো true ।এটাই হল ব্র্যাক statement কাজ  
 
-                    
+ 
+### Continue : continue statement সাধারণত ব্যবহার করা হয়  কোনো একটা loop ( চক্র ) কে স্কিপ করার জন্য ।এবং ওই loop (চক্র) কে স্কিপ করে পরবর্তী যে চক্র বা লুপ আছে ওইটা continue করে। 
+                কিন্তু break এর মত পুরো loop টাকে exit করে দেয় না। নিচে উদাহরণ দেয়া হল।   
+                
+                
+                for ($i = 1; $i <= 5; $i++) {
+                    if ($i == 3) {
+                        continue; // $i = 3 হলে এই iteration (একটি পূর্ণ চক্র ) টি স্কিপ হবে
+                    }
+                    echo "Number: $i <br>";
+                }
+                
+                আউটপুট 
+                Number: 1
+                Number: 2
+                Number: 4
+                Number: 5
+                এখানে যখন $i  = 3 এই condition টা সত্য হয়েছে তখন ওই চক্র বা loop টিকে skip করা হয়েছে। এবং পরবর্তী যে loop বা চক্র টি আছে ঐটাকে Continue করা হয়েছে। 
+                [ এখানে আমি চক্র বলতে যেটা বুঝতে চেয়েছে সেটা হল। $i = 1; $i <= 5; $i++ এর মানে এখানে ৫ টা চক্র বা loop সম্পন্ন হবে কারণ condition দেয়া আছে $i <= 5; মানে $i এর 5 এর বড় হবে না। 
+                আমরা জানি loop মানে কোন কোড এর একটি নির্দিষ্ট block বার বার excute করে যতক্ষণ না condtion টা false হচ্ছে।  ]
 
 
                      
