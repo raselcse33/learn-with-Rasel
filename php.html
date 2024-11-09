@@ -64,7 +64,7 @@ PHP Topices Start.
 ## variable scope : variable scope মানে হচ্ছে variable টাকে কোন কোন জায়গা থেকে access করা যাবে। কারণ সব ভ্যারিয়েবল সব জায়গা থেকে access করা যাই না। 
     three main types of variable scope in PHP:
 
-##Local Scope: যে ভ্যারিয়েবল টাকে ফাঙ্কশন এর ভিতর declured করা হয় তাকে Local Scope বলে. এর মানে এই ভ্যারিয়েবল টাকে কেবলমাত্র ফাঙ্কশন এর ভিতরই access করা যাবে। এর বাহির থেকে এক্সেস করা যাবে না .
+##Local Scope:  Local Scope হচ্ছে এই ভ্যারিয়েবল যেখানে declured করা হয়েছে শুধু ঐখানে একে এক্সেস করা যাবে আর একেই Local Scope বলে. এর মানে কোনো  ভ্যারিয়েবল function এর ভিতর declured করলে  কেবলমাত্র ফাঙ্কশন এর ভিতরই access করা যাবে। এর বাহির থেকে এক্সেস করা যাবে না .
         <?php
         function myFunction() {
             $name = "John";  // Local variable, only available inside this function
@@ -551,6 +551,112 @@ PHP Topices Start.
                 এখানে যখন $i  = 3 এই condition টা সত্য হয়েছে তখন ওই চক্র বা loop টিকে skip করা হয়েছে। এবং পরবর্তী যে loop বা চক্র টি আছে ঐটাকে Continue করা হয়েছে। 
                 [ এখানে আমি চক্র বলতে যেটা বুঝতে চেয়েছে সেটা হল। $i = 1; $i <= 5; $i++ এর মানে এখানে ৫ টা চক্র বা loop সম্পন্ন হবে কারণ condition দেয়া আছে $i <= 5; মানে $i এর 5 এর বড় হবে না। 
                 আমরা জানি loop মানে কোন কোড এর একটি নির্দিষ্ট block বার বার excute করে যতক্ষণ না condtion টা false হচ্ছে।  ]
+
+
+                **********************PHP Function*****************************
+
+#####PHP Function : php function হচ্ছে code এর ভিতর একটা নির্দিষ্ট block যেটা একটা নির্দিষ্ট কাজের জন্য ব্যবহার হয়। 
+                    [code হচ্ছে একটা instructions (নির্দেশনা) বা command যেটা কোনো programming language লেখা হয় , যাতে করে কম্পিউটার ওই instructions অনুযায়ি কাজ করতে পারে (excution করতে পারে )।
+                    আমরা জানি code লেখা হয় programming ল্যাঙ্গুয়েজে দিয়ে। প্রত্যেক single লাইন code কোনো না কোনো কাজের  নির্দেশনা দেয় computer কে  যে তুমি এটা কর , তখন compute ওই কাজ টা করে এবং আমরা তার রেজাল্ট টা দেখতে পাই। 
+                    মোটকথা computer এর সাথে commnucation একটা মাধ্যম হল কোড [ (programming ল্যাঙ্গুয়েজে) . অন্য ভাবে বললে programming language এর লিখিত রূপ হল কোড].
+
+                    example : 
+                    <?php
+                    echo "Hello, World!";
+                    ?>
+
+                    এখানে কোড instructions দিচ্ছে computer কে তুমি Hello, World! টেক্সট টা screen শো কর। 
+
+                    function এর ব্যবহার করার অনেক গুলো উপকার আছে। 
+
+                    Reusability (বার বার ব্যবহার করা যায়। )
+                    Organization (সুগঠিত )
+                    Maintainability (সহজে রক্ষণাবেক্ষণযোগ্যতা , যেহেতু একটা নির্দিষ্ট কাজের জন্য ব্যবহার হয়, সেহেতু খুব সহজে রক্ষণাবেক্ষণ করা যায়।একটু ডিটেলস বললে যেহেতু একটা function 
+                    বার বার বেবহার হতে পারে কোড এর ভিন্ন ভিন্ন জায়গা থেকে , সেহেতু আমি যদি শুধু ওই function টাতে কোন পরিবর্তন আনি ,তাহলে এই পরিবর্তন সব জায়গাতেই পরবে। অর্থাৎ যারা যারা এই function call করছে।)
+
+                    
+                    
+                    উদাহরণ (function):
+                    <?php
+                    function sayHello() {
+                        echo "Hello, World!";
+                    }
+
+                    // Calling the function
+                    sayHello(); // Outputs: Hello, World!
+                    ?>
+
+                    function লেখার নিয়ম হচ্ছে সাধারণত  function নাম দিযে function লেখা শুরু করতে হয়। এবং function এর একটা নাম দিতে হবে। 
+                    sayHello হল function এর নাম এবং এর আগে function কথাটি লিখা হয়েছে । function এর ভিতরের code কে exction করতে হলে এটাকে call করতে। 
+                    কারণ call ছাড়া এটা একা একা  exction হয় না। 
+
+
+                    ### Parameters: Inputs to make functions flexible
+                            function greet($name) {
+                                echo "Hello, $name!";
+                            }
+                            greet("Alice");
+
+                    ### Return Values: Get results back from functions.  
+                            function add($a, $b) {
+                                return $a + $b;
+                            }
+                            $sum = add(5, 3);
+                    
+                    ### Default Parameters: Provide default values for parameters
+                                function greet($name = "Guest") {
+                                    echo "Hello, $name!";
+                                }
+                               
+                                
+                    
+######PHP বিভিন্ন ধরণের function রয়েছে নিচে আলোচনা করা হল 
+
+        User-Defined Functions : কোনো User যখন তার নির্দিষ্ট কাজের জন্য কোনো function তৈরী করে তখন তাকে User-Defined Functions বলে। 
+                                 
+                                উধাহরন :
+                                <?php
+                                function greet() {
+                                    echo "Hello, World!";
+                                }
+                                greet(); 
+                                ?>
+                          
+        Built-in Functions : Built-in Functions হল আগের থেকে define বা তৈরী  করা function যেটার কোনো পরিবর্তন বা modification করা যাবে না। শুধু ব্যবহার করা যাবে। 
+                                php তে এরকম অনেক Built-in Functions রয়েছে কাজকে সহজ করার জন্য 
+                                উধাহরন :
+                                echo round(4.6); // Outputs: 5
+                                round একটা Built-in Functions যেটা সব সময় neares integer velue দেয়       
+                                
+                                
+        Anonymous Functions (Closures) : Anonymous Functions কে Closures function বলা। এই function এর কোনো নাম থাকে না। এটি সাধারণত 
+                                         ব্যবহার হয়  inline functions or assigned to variables জন্য। এবার আসি inline functions কি   
+                                        inline functions বলতে সহজে যেটা বলা যায় সেটা হল। এটি একটি ছোট function বা  temporary functions বলা যেতে পারে , 
+                                         যেটা immediately কোনো একটা কাজ সম্পন্ন করার জন্য ব্যবহার  করা হয় এবং ওরকম কোন plan থাকে না যে এটাকে আবার reuse করবো । 
+
+                                         assigned to variables বলতে আমরা বুজি কোনো একটা ভ্যারিয়েবল এর ভিতর ভ্যালু এসাইন করা, সিম্পল ভাবে এটাই বুজি। 
+                                        যেমন $x = "১০";
+                                        এখানে $x ভ্যারিয়েবল আর ১০ হল ভ্যালু। 
+                                        আমরা Anonymous Functions কেউ ভ্যারিয়েবল এর ভিতর এসাইন করতে পারি।     
+                                        finally আমরা বলতে পারি  ছোট এবং immediately কোনো টাস্ক সম্পন্ন করার জন্য এবং যে টাস্ক টা আমাদের বার বার use করার দরকার পরবে না। এরকম কোন কাজ করার জন্য আমাদের Anonymous Functions ব্যবহার করা হয়। এরফলে আমাদের ঘটা করে কোনো function এর নাম দিয়ে নতুন করে কোনো function লিখতে হয় না। 
+                                        ফলে এটা আমাদের কোড short হয়।     
+                                        
+                                        Anonymous Functions এর আরেকটা মজার দিক রইছে।সেটা হল Local Scope . Scope নিয়ে আগে আলোচনা করা হয়েছে ,হালকা ভাবে বললে স্কোপ মানে accessible 
+                                        area . অর্থাৎ কাকে কোন কোন জায়গা থেকে access করা যাবে। Local Scope হচ্ছে এটাকে যেখানে declured করা হয়েছে শুধু ঐখানে একে এক্সেস করা যাবে। একটা 
+                                        উধাহরন দিলে সহজ হবে। 
+
+                                        $name = "Alice";
+                                        $sayHello = function() use ($name) { // Captures $name from outside
+                                            echo "Hello, $name";
+                                        };
+
+                                        $sayHello(); // Output: Hello, Alice
+
+                                        এখানে $name একটা variable যেটা function এর বাহিরে declured করা হয়েছে। ফলে এটাকে  function এর ভিতর থেকে access করা যাবে না এবং access করতে গেলে একটা error দিবে . একে function এর বাহির থেকেই কেবল  access করতে হবে। কিন্তু Anonymous Functions  "use " কীওয়ার্ড ব্যবহার করে এই ভ্যারিয়েবল টাকে 
+                                        function এর ভিতরে ও ব্যবহার করতে পারে। মজার না। জটিল জিনিস।  
+
+                                                            
+
 
 
                      
