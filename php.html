@@ -634,6 +634,15 @@ PHP Topices Start.
                                         inline functions বলতে সহজে যেটা বলা যায় সেটা হল। এটি একটি ছোট function বা  temporary functions বলা যেতে পারে , 
                                          যেটা immediately কোনো একটা কাজ সম্পন্ন করার জন্য ব্যবহার  করা হয় এবং ওরকম কোন plan থাকে না যে এটাকে আবার reuse করবো । 
 
+                                         example:
+                                         // Inline function to square a number
+                                            $square = function($number) {
+                                                return $number * $number;
+                                            };
+
+                                            echo $square(4); // Output: 16
+
+
                                          assigned to variables বলতে আমরা বুজি কোনো একটা ভ্যারিয়েবল এর ভিতর ভ্যালু এসাইন করা, সিম্পল ভাবে এটাই বুজি। 
                                         যেমন $x = "১০";
                                         এখানে $x ভ্যারিয়েবল আর ১০ হল ভ্যালু। 
@@ -652,10 +661,47 @@ PHP Topices Start.
 
                                         $sayHello(); // Output: Hello, Alice
 
-                                        এখানে $name একটা variable যেটা function এর বাহিরে declured করা হয়েছে। ফলে এটাকে  function এর ভিতর থেকে access করা যাবে না এবং access করতে গেলে একটা error দিবে . একে function এর বাহির থেকেই কেবল  access করতে হবে। কিন্তু Anonymous Functions  "use " কীওয়ার্ড ব্যবহার করে এই ভ্যারিয়েবল টাকে 
+                                        এখানে $name একটা variable যেটা function এর বাহিরে declured করা হয়েছে। ফলে এটাকে  function এর ভিতর থেকে access করা যাবে না এবং access করতে গেলে একটা error দিবে . 
+                                        একে function এর বাহির থেকেই কেবল  access করতে হবে। কিন্তু Anonymous Functions  "use " কীওয়ার্ড ব্যবহার করে এই ভ্যারিয়েবল টাকে 
                                         function এর ভিতরে ও ব্যবহার করতে পারে। মজার না। জটিল জিনিস।  
 
-                                                            
+
+
+
+        Arrow function: arrow function ও Anonymous Function এর  মতো অনেকটা। এটাও একটা inline functions,এই function এর কোনো নাম থাকে 
+                         না ,এবং এটাকেও variable assign করা যায়, এবং দুটো function ই ব্যবহার হয় ছোট task এর জন্য। তবে এর মধ্যে কিছু পার্থক্য আছে। 
+                         নিচে একটা উদাহরণ দেওয়া হল arrow function এর। 
+
+                        <?php
+                        $c = 0; // outer scope variable
+                        $sum = fn($a, $b) => $a + $b + $c;
+                        echo $sum(5, 10); // Output: 15  
+                        php?>  
+                        
+                        
+
+                    ফীচার                                    Arrow function                           
+
+                     1.Syntax                              fn  keyword ব্যবহার করা হয়। 
+                     2.Return                              এই খানে return দরকার পরে না অটোমেটিক ভাবে result return হয়। 
+
+                     3.Outer Scope Variables               outer scope variable access করার জন্য কোনো keyword দরকার পরে না। অটোমেটিক ভাবেই access করা যায়। 
+                     4.Introduced in PHP                   PHP 7.4
+                     5.code cmplexcity                     Can not handle multiple lines of code
+
+
+
+
+
+                    ফীচার                                    Anonymous Function                            
+
+                     1.Syntax                              function  keyword ব্যবহার করা হয়।  
+                     2.Return                              function এর ভিতর result পাওয়ার জন্য return  ব্যবহার করা হয়।                 
+
+                     3.Outer Scope Variables               outer scope variable access করার জন্য use keyword ব্যবহার করা হয়
+                     4.Introduced in PHP                   PHP 5.3
+                     5.code cmplexcity                     Can  handle multiple lines of code
+
 
 
 
