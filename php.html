@@ -642,6 +642,9 @@ PHP Topices Start.
 
                                             echo $square(4); // Output: 16
 
+                                        explain: Here, $square(4) means you are calling the anonymous function stored in $square and 
+                                        passing 4 as the value for the parameter $number. ["function is stored," it means that the function is assigned to a variable.]   
+
 
                                          assigned to variables বলতে আমরা বুজি কোনো একটা ভ্যারিয়েবল এর ভিতর ভ্যালু এসাইন করা, সিম্পল ভাবে এটাই বুজি। 
                                         যেমন $x = "১০";
@@ -702,6 +705,27 @@ PHP Topices Start.
                      4.Introduced in PHP                   PHP 5.3
                      5.code cmplexcity                     Can  handle multiple lines of code
 
+         
+         Recursive Functions (call) :Recursive Functions  হল এমন একটি প্রসেস, যেখানে একটি ফাঙ্কশন নিজেই নিজেকে কল করে।
+         একটি ফাঙ্কশন নিজেই নিজেকে পুনরায় কল করে, এবং এই প্রক্রিয়াটিকে Recursive Call বলা হয়।এবং এখানে দুটি পার্ট থাকে একটা base case (যেখানে ফাঙ্কশনটি থামবে,বা অন্য কিছু।  ) 
+         আরেকটা হলো recursive case (যেখানে recursion নিজেকে কল করে) 
+
+                     নিচে উদাহরণ দেয়া হলো 
+                     function factorial($n) {
+                         if ($n == 1) { // Base case
+                             return 1;
+                         }
+                         return $n * factorial($n - 1);  // Recursive call inside the function
+                     }    
+                     echo factorial(5);
+
+                     output:
+                    factorial(5) returns 5 * factorial(4).
+                    factorial(4) returns 4 * factorial(3).
+                    factorial(3) returns 3 * factorial(2).
+                    factorial(2) returns 2 * factorial(1).
+                    factorial(1) returns 1 (base case reached).       
+                    Then the results are combined: 5 * 4 * 3 * 2 * 1 = 120.  
 
 
 
