@@ -728,6 +728,50 @@ PHP Topices Start.
                     Then the results are combined: 5 * 4 * 3 * 2 * 1 = 120.  
 
 
+        ***************************** Array ***********************************************
+        
+        Array : Array হলো এমন একটা ভ্যারিয়েবল যেখানে  multiple ভ্যালু assign করা যায়। এবং সেই ভ্যালু গুলোকে index এর মাধ্যমে এক্সেস করা যায়।             
+        example : 
+        <?php
+        $fruits = array("Apple", "Banana", "Orange");  // This is an array
+        echo $fruits[0];  // Outputs: Apple (first item in the array)
+        ?>
+
+        Type of Array:
+                Indexed Arrays: Arrays with numeric keys (starting from 0).
+                Associative Arrays: Arrays with custom string keys.
+                Multidimensional Arrays: Arrays containing other arrays.
+
+
+                Indexed Arrays :  Indexed Arrays  তে  integer key ব্যবহার করা হয়। এবং এটা auto generate যদি manually assign না করা হয়। 
+
+                Example: 
+                <?php
+                $fruits = ["apple", "banana", "orange"]; // Indexed array
+
+                echo $fruits[0]; // Outputs: apple
+                echo $fruits[1]; 
+                ?>
+
+
+                Associative Arrays : Associative Arrays তে সাধারণত string key ব্যবহার করা হয় ,তবে integer key ও ব্যবহার করা যায়, এখানে ইচ্ছা মতো কীয় ব্যবহার করা যায়।
+                
+                $associativeArray = [
+                "name" => "Alice", // String key
+                42 => "Meaning of life", // Integer key
+                "city" => "Paris"
+                 ];
+                echo $associativeArray["name"]; // Outputs: Alice
+                echo $associativeArray[42];  
+                ?>
+               
+                main পার্থক্য টা হলো Indexed Arrays কীয় সবসময় integer ,এবং এটা auto genarate .ওপর দিকে Associative Arrays key string অথবা integer .( তবে fully customize )
+               
+                USES : Indexed Arrays ব্যবহার করা  sequential data (like a list or collection) store করার জন্য  . আর Associative Arrays বেবহার করা হয় meaningful keys সহ ডাটা store করার জন্য। 
+               
+                Key  : যেহেতু array তে আমরা multiple ভ্যালু রাখি ,সেহেতু spacific ভাবে ওই ভ্যালু গুলোকে ধরার জন্য আমরা Key এর আন্ডার রাখি এটাই হলো Key .         
+
+
 
                      
 
