@@ -711,21 +711,16 @@ PHP Topices Start.
          আরেকটা হলো recursive case (যেখানে recursion নিজেকে কল করে) 
 
                      নিচে উদাহরণ দেয়া হলো 
-                     function factorial($n) {
-                         if ($n == 1) { // Base case
-                             return 1;
-                         }
-                         return $n * factorial($n - 1);  // Recursive call inside the function
-                     }    
-                     echo factorial(5);
-
-                     output:
-                    factorial(5) returns 5 * factorial(4).
-                    factorial(4) returns 4 * factorial(3).
-                    factorial(3) returns 3 * factorial(2).
-                    factorial(2) returns 2 * factorial(1).
-                    factorial(1) returns 1 (base case reached).       
-                    Then the results are combined: 5 * 4 * 3 * 2 * 1 = 120.  
+                     function countdown($number) {
+                        if ($number <= 0) { // Base case
+                            return;
+                        }
+                        echo $number . "\n"; // Print the current number
+                        countdown($number - 1); // Recursive call
+                    }
+                    
+                    countdown(5);
+                    
 
 
         ***************************** Array ***********************************************
