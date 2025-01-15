@@ -773,6 +773,44 @@ PHP Topices Start.
                     Three-Dimensional Array: (array যেখানে প্রত্যেকটা ভ্যালু two-dimensional array) 
                     N-Dimensional Array:  (Arrays with more nested levels)
 
+         
+                    
+               Two-Dimensional Array : Two-Dimensional Array হলো একটা multiple array , যেটা row এবং column মতো আচরণ করে। একটা উদাহরণ দেওয়া হল। 
+
+               $products = [   ["Laptop", 1200, 5],["Smartphone", 800, 10],["Tablet", 400, 7]   ];
+               
+               এটা একটা Two-Dimensional Array . কারণ এখানে $products একটা main array ,এবং এর মধ্যে যে ভ্যালু গুলো assign  আছে, সেগুলো ও এক একটা array . এবার আসি এটা কিভাবে  row এবং column মতো আচরণ করে। এখানে main Array টা হচ্ছে row এবং এর ভিতর যে ভ্যালু হিসাবে array গুলো আছে সেগুলো হচ্ছে column . অর্থাঃ 
+               
+               
+               $products = [   
+               
+               ["Laptop",        1200,                5],             =======> first row (0 index)
+                  ।                ।                  ।
+                  ।                ।                  ।
+               (1r  ,1c  )     (1r ,2c )       (1r ,3c )
+               (0 index)      (1 index)     (3 index)
+               
+               
+               
+               ["Smartphone",         800,          10],    =======> second  row (1 index)
+               
+                 ।                    ।                  ।
+                 ।                    ।                  ।
+               (2r  ,1c  )         (2r ,2c )       (2r ,3c )
+                
+               (0 index)           (1 index)     (3 index)
+               
+               
+               ["Tablet",        400,             7]                 =======> third  row (2 index)
+               
+                 ।                ।               ।
+                 ।                ।               ।
+               (3r  ,1c  )     (3r ,2c )       (3r ,3c )
+               (0 index)      (1 index)     (3 index)
+               
+               
+                ];          
+
 
                      
 
