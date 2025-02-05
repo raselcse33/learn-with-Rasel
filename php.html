@@ -830,7 +830,59 @@ PHP Topices Start.
                     ]
                 ];
 
+                নিচে আরেকটা উধাহরন দেওয়া হল 
+
+                $school = [
+                
+                [
+                   ["Rasel", "A+"],
+                   ["Rahim", "B"]
+           
+               ],
+           
+               [
+                   ["Karim", "A"],
+                   ["Jamal", "C"]
+           
+               ]
+           ];
+
                 এখানে $school একটা main array যেখানে ভ্যালু হিসাবে আছে two dimension array .
+
+          
+         N-Dimensional Array :  N-Dimensional array মানে হল  main array এর ভিতর ভ্যালু হিসাবে (সাধারণত array ভ্যালুগুলো  index হিসাবে থাকে যেমন ০,১। ওই ০ index যত তত array ) যত তত array .  একটা উদাহরণ নিচে দেয়া হল। 
+
+         $universe = [
+         [
+             [
+                 ["Life Exists", "Oxygen Available"]
+             ]
+         ],
+
+        [
+            [
+                ["Life not Exists", "Oxygen not Available"]
+            ]
+         ]
+     ]
+
+
+
+     Behind the seen in Array (how its work): 
+     যখন তুমি একটা অ্যারে তৈরি করো, PHP এটি RAM-এ সংরক্ষণ করে। প্রতিটি মান (value) একটি নির্দিষ্ট মেমরি ঠিকানায় (Memory Address) থাকে, যা CPU দ্রুত এক্সেস করতে পারে।
+
+     কীভাবে PHP অ্যারে RAM-এ কাজ করে?
+     1️⃣ তুমি যখন $array = ["Apple", "Banana", "Mango"]; লিখো, PHP এটি RAM-এ সংরক্ষণ করে।
+     2️⃣ প্রতিটি মানের জন্য একটি Memory Address থাকে, যেমন:
+
+        Index	Value	Memory Address (RAM)
+        0	Apple	        0x100
+        1	Banana	        0x104
+        2	Mango	        0x108
+        3️⃣ যখন তুমি echo $array[1]; লিখো, PHP RAM থেকে 0x104 অ্যাড্রেস থেকে "Banana" নিয়ে আসে।
+
+
+     
 
 
                      
