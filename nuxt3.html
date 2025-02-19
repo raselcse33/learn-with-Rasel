@@ -1,0 +1,260 @@
+follow the step : 
+
+1 npx nuxi init nuxt3-app
+2 cd nuxt3-app
+3 npm install
+4 npm install axios
+
+
+folder structure : 
+.nuxt/: এই ফোল্ডারটি অটোজেনারেটেড হয়, এখানে Nuxt3 এর বিল্ড ফাইল থাকে।
+
+assets/: এখানে CSS, ফন্ট, ইমেজ ইত্যাদি অ্যাসেট ফাইল রাখা হয়।
+
+components/: এখানে Vue কম্পোনেন্টস রাখা হয়।
+
+composables/: এখানে কম্পোজেবল ফাংশন রাখা হয় (Vue 3 এর কম্পোজিশন API ব্যবহার করে)।
+
+layouts/: এখানে লেআউট কম্পোনেন্টস রাখা হয়।
+
+pages/: এখানে পেজ কম্পোনেন্টস রাখা হয়। প্রতিটি Vue ফাইল একটি রাউট হিসেবে কাজ করে।
+
+plugins/: এখানে প্লাগইন ফাইল রাখা হয়।
+
+public/: এখানে পাবলিক ফাইল রাখা হয় (যেমন: favicon.ico)।
+
+server/: এখানে সার্ভার-সাইড API রাউটস এবং মিডলওয়্যার রাখা হয়।
+
+app.vue: এটা মূল এপ্লিকেশন কম্পোনেন্ট।
+
+nuxt.config.ts: এখানে Nuxt3 কনফিগারেশন করা হয়।
+
+package.json: এখানে প্রজেক্টের ডিপেন্ডেন্সি এবং স্ক্রিপ্টস থাকে।
+
+
+
+layouts setup : প্রথমে layouts নাম একটা ফোল্ডার বানাতে হবে.খেয়াল রাখতে হবে বানান টা অব্যশই layouts হতে হবে। এর ভিতর default.vue নামে একটা পেজ বানাতে হবে। এটাই হবে main template . laravel এর মত।  নিচে default,vue পেজ এর উদাহরণ দেয়া হল 
+
+<template>
+    <div>
+      <header>
+        <h1>My Nuxt3 App</h1>
+        <nav>
+          <ul>
+            <li><NuxtLink to="/">Home</NuxtLink></li>
+            <li><NuxtLink to="/about">About</NuxtLink></li>
+            <li><NuxtLink to="/list">About</NuxtLink></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer>
+        <p>&copy; 2023 My Nuxt3 App</p>
+      </footer>
+    </div>
+  </template>
+
+এটা হল main template . আমরা এই প্রজেক্ট যত পেজ বানাবো ওই পেজ গুলো এই টেম্পলেট টা পাবে ডিফল্ট ভাবে। 
+
+<main>
+     <slot />
+</main>
+
+আর এই <main> অংশ টা হচ্ছে যেখানে আপনি আপনার পেজ wise যে কনটেন্ট বা design দরকার ঐটুকু এখানে করবেন।  একদম লারাভেল এর মত। 
+
+
+
+
+axios setup with plaguins
+
+nuxt3 axios ব্যবহার করা খুবই সহজ। axios একটি জনপ্রিয় HTTP ক্লায়েন্ট লাইব্রেরি, যা দিয়ে আপনি API কল, ডেটা ফেচিং ইত্যাদি কাজ করতে পারবেন। 
+নিচের ধাপগুলি অনুসরণ করে nuxt3 এ axios ব্যবহার করতে পারেন:
+
+১.   axios ইন্সটল করা
+     npm install axios
+
+২. axios ব্যবহার করার উপায়
+    nuxt3  এ axios ব্যবহার করার জন্য প্রধানত দুটি উপায় আছে:
+
+উপায় ১: সরাসরি কম্পোনেন্টে axios ব্যবহার করা
+আপনি সরাসরি কোনো Vue কম্পোনেন্টে axios ইম্পোর্ট করে ব্যবহার করতে পারেন। উদাহরণস্বরূপ:
+
+<template>
+    <div>
+      <h1>User Data</h1>
+      <ul v-if="users.length">
+        <li v-for="user in users" :key="user.id">{{ user.name }}</li>
+      </ul>
+      <p v-else>Loading...</p>
+    </div>
+  </template>
+  
+  <script setup>
+  import axios from 'axios';
+  import { ref, onMounted } from 'vue';
+  
+  const users = ref([]);
+  
+  onMounted(async () => {
+    try {
+      const response = await axios.get('https://jsonplaceholder.typicode.com/users');
+      users.value = response.data;
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  });
+  </script>
+
+এই উদাহরণে:
+
+axios.get ব্যবহার করে একটি API কল করা হয়েছে।
+onMounted লাইফসাইকেল হুক ব্যবহার করে কম্পোনেন্ট মাউন্ট হওয়ার পর ডেটা ফেচ করা হয়েছে।
+ডেটা users রেফ ভেরিয়েবলে স্টোর করা হয়েছে এবং টেমপ্লেটে ডিসপ্লে করা হয়েছে।
+
+
+
+
+
+
+
+
+
+
+
+
+
+উপায় ২: প্লাগইন হিসেবে axios ব্যবহার করা
+আপনি চাইলে axios কে একটি প্লাগইন হিসেবে সেটআপ করতে পারেন। এটি করার জন্য নিচের ধাপগুলি অনুসরণ করুন:
+প্রথমে plugins নাম একটা ফোল্ডার বানাতে হবে। এবং এর মধ্যে axios .js একটা ফাইল বানাতে হবে।  
+
+plugins/axios.js ফাইল তৈরি করুন এবং নিচের কোডটি লিখুন:
+
+<!-- code -->
+import axios from 'axios';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  const axiosInstance = axios.create({
+    baseURL: 'https://jsonplaceholder.typicode.com', // আপনার API এর বেস URL
+  });
+
+  // আপনি চাইলে এখানে ইন্টারসেপ্টরস বা অন্যান্য কনফিগারেশন যোগ করতে পারেন
+  axiosInstance.interceptors.request.use((config) => {
+    console.log('Request sent:', config.url);
+    return config;
+  });
+
+  // axios কে全局ভাবে ব্যবহারের জন্য provide করুন
+  nuxtApp.provide('axios', axiosInstance);
+});
+
+<!-- code end -->
+
+
+
+
+
+
+<!-- details  -->
+
+এই কোডটি Nuxt3 এ axios কে একটি প্লাগইন হিসেবে সেটআপ করার জন্য ব্যবহার করা হয়। প্লাগইন হল এমন একটি ফাংশন বা কোড ব্লক, যা আপনার অ্যাপ্লিকেশনের বিভিন্ন অংশে গ্লোবালি ব্যবহার করা যায়। এখানে axios কে একটি প্লাগইন হিসেবে সেটআপ করা হয়েছে, যাতে আপনি যেকোনো কম্পোনেন্টে এটি সহজে ব্যবহার করতে পারেন।
+
+এখন আমি এই কোডটিকে ধাপে ধাপে ব্যাখ্যা করব, যাতে আপনি সহজে বুঝতে পারেন:
+
+১. axios ইম্পোর্ট করা
+javascript
+Copy
+import axios from 'axios';
+এখানে axios লাইব্রেরি ইম্পোর্ট করা হয়েছে। axios হল একটি HTTP ক্লায়েন্ট, যা দিয়ে আপনি API কল, ডেটা ফেচিং ইত্যাদি কাজ করতে পারবেন।
+
+২. defineNuxtPlugin ব্যবহার করা
+javascript
+Copy
+export default defineNuxtPlugin((nuxtApp) => {
+  // প্লাগইন লজিক
+});
+defineNuxtPlugin হল Nuxt3 এর একটি ফাংশন, যা প্লাগইন তৈরি করতে ব্যবহৃত হয়।
+
+nuxtApp হল Nuxt3 অ্যাপ্লিকেশনের একটি ইনস্ট্যান্স, যার মাধ্যমে আপনি গ্লোবাল ফিচার বা ফাংশন অ্যাড করতে পারেন।
+
+৩. axios ইনস্ট্যান্স তৈরি করা
+javascript
+Copy
+const axiosInstance = axios.create({
+  baseURL: 'https://jsonplaceholder.typicode.com', // আপনার API এর বেস URL
+});
+axios.create ব্যবহার করে একটি কাস্টম axios ইনস্ট্যান্স তৈরি করা হয়েছে।
+
+baseURL হল আপনার API এর মূল URL। উদাহরণস্বরূপ, https://jsonplaceholder.typicode.com হল একটি টেস্ট API এর URL। আপনি এটিকে আপনার প্রকৃত API URL দিয়ে রিপ্লেস করতে পারেন।
+
+এই baseURL এর মাধ্যমে আপনি শুধু রিলেটিভ পাথ (যেমন: /users) ব্যবহার করে API কল করতে পারবেন। axios অটোমেটিকভাবে baseURL এর সাথে পাথ জুড়ে দেবে।
+
+৪. ইন্টারসেপ্টরস যোগ করা
+
+axiosInstance.interceptors.request.use((config) => {
+  console.log('Request sent:', config.url);
+  return config;
+});
+interceptors.request.use ব্যবহার করে একটি রিকোয়েস্ট ইন্টারসেপ্টর যোগ করা হয়েছে।
+
+এই ইন্টারসেপ্টরটি প্রতিটি API রিকোয়েস্ট পাঠানোর আগে এক্সিকিউট হয়।
+
+এখানে console.log ব্যবহার করে রিকোয়েস্টের URL প্রিন্ট করা হয়েছে। আপনি চাইলে এখানে অন্যান্য লজিক যোগ করতে পারেন, যেমন:
+
+হেডারস যোগ করা
+
+টোকেন ভেরিফিকেশন
+
+লোডিং স্টেট ম্যানেজ করা
+
+return config দিয়ে রিকোয়েস্ট কনফিগারেশন রিটার্ন করা হয়েছে।
+
+৫. axios কে গ্লোবালি প্রোভাইড করা
+
+nuxtApp.provide('axios', axiosInstance);
+nuxtApp.provide ব্যবহার করে axiosInstance কে গ্লোবালি প্রোভাইড করা হয়েছে।
+
+এর মানে হল, এখন আপনি যেকোনো কম্পোনেন্টে useNuxtApp() হুক ব্যবহার করে এই axiosInstance এক্সেস করতে পারবেন।
+
+উদাহরণস্বরূপ:
+
+const { $axios } = useNuxtApp();
+const response = await $axios.get('/users');
+
+
+
+
+<!-- call api -->
+
+<template>
+  <div>
+    <h1>User Data</h1>
+    <ul v-if="users.length">
+      <li v-for="user in users" :key="user.id">{{ user.name }}</li>
+    </ul>
+    <p v-else>Loading...</p>
+  </div>
+</template>
+
+<script setup>
+const { $axios } = useNuxtApp();
+const users = ref([]);
+
+onMounted(async () => {
+  try {
+    const response = await $axios.get('/users');
+    users.value = response.data;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+  }
+});
+</script>
+
+
+
+
+
+
+
+
