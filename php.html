@@ -2307,7 +2307,100 @@ Cookies ব্রাউজারে তথ্য সংরক্ষন করে
                     * API call করে [External ]
                     * FileUploader[common ]
                 আরেকটা জিনিস যেটা, প্রায় সব প্রজেক্টই এইগুলো কমন থাকে , এই কাজ গুলো করার জন্য যে  ক্লাস আছে সেগুলো  হচ্ছে  Low-Level Class .
-                মোট কথা হল , যেটাই আপনি High-Level ,Low-Level করেন না কেন।  খেয়াল রাখতে হবে High-Level-class  যেন Low-Level-class এর উপর নির্ভর না করে। 
+                মোট কথা হল , যেটাই আপনি High-Level ,Low-Level করেন না কেন।  খেয়াল রাখতে হবে High-Level-class  যেন Low-Level-class এর উপর নির্ভর না করে।
+                
+                
+                উদাহরন : 
+<!-- 
+                এটা একটা থার্ড পার্টি কাজ , অন্যথায় এটা একটা system-level কাজ , যেটা শুধু পেমেন্ট রিলেটিভ কাজ করে। so বলতেই পারি যে এটা একটা 
+                লো-লেভেল class . -->
+
+                class StripePayment {
+                    public function pay($amount) {
+                        echo "Paid $amount using Stripe";
+                    }
+                }
+
+                <!-- এটা একটা হাই-লেভেল class  -->
+                class OrderManager {
+                    protected $payment;
+
+                    public function __construct() {
+                        $this->payment = new StripePayment(); // ❌ নির্ভর করছে একটাই payment method এর উপর
+                    }
+
+                    public function placeOrder($amount) {
+                        $this->payment->pay($amount);
+                    }
+                }
+
+                এখানে আমরা দেখতে পাচ্ছি একটা একটা হাই-লেভেল class একটা লো-লেভেল class এর উপর নির্ভর করছে। যেটা এই প্রিন্সিপলের rule এর বাহিরে। 
+
+                সমস্যা কী?
+                OrderManager class সরাসরি StripePayment class কে চেনে।
+                এখন যদি তুমি BkashPayment চালু করতে চাও, তাহলে OrderManager এর কোড change করতে হবে।
+                এতে code tightly coupled হয়ে গেছে ❌
+
+
+            এবার rule মেনে চলে এরকম একটা উদাহরণ 
+
+            <!-- Step 1: একটা Interface তৈরি করি -->
+            interface PaymentMethod {
+                public function pay($amount);
+            }
+            <!-- Step 2: এখন Stripe আর Bkash আলাদা আলাদা implement করবে -->
+            class StripePayment implements PaymentMethod {
+                public function pay($amount) {
+                    echo "Paid $amount using Stripe";
+                }
+            }
+
+            class BkashPayment implements PaymentMethod {
+                public function pay($amount) {
+                    echo "Paid $amount using Bkash";
+                }
+            }
+
+            <!-- Step 3: এখন High-Level OrderManager class কে interface দেওয়া হবে -->
+            class OrderManager {
+                protected $payment;
+
+                // Constructor Injection
+                public function __construct(PaymentMethod $payment) {
+                    $this->payment = $payment;
+                }
+
+                public function placeOrder($amount) {
+                    $this->payment->pay($amount);
+                }
+            }
+
+
+            <!-- // Stripe দিয়ে পেমেন্ট -->
+            $order = new OrderManager(new StripePayment());
+            $order->placeOrder(1000);
+            // Output: Paid 1000 using Stripe
+
+            <!-- // Bkash দিয়ে পেমেন্ট -->
+            $order2 = new OrderManager(new BkashPayment());
+            $order2->placeOrder(1500);
+            // Output: Paid 1500 using Bkash
+
+
+            📌 বুঝে নাও এখন:
+
+            বিষয়	                 DIP না মানলে	                                                 DIP মানলে
+            পরিবর্তন করলে	         মূল class ভেঙে ফেলতে হয় ❌	                                  শুধু নতুন class বানালেই হয় ✅
+            Dependency	             class directly depends ❌	                                   interface/abstraction এর উপর depends ✅
+            Flexibility	             নেই ❌	                                                       অনেক বেশি ✅
+
+
+
+        🧠 এইভাবে মনে রাখো:
+        🔹 “High-level manager” যেন সরাসরি “Stripe বা Bkash” (class) এর সাথে কথা না বলে,
+        🔹 বরং একটা “Payment Interface” (interface,abstract) এর মাধ্যমে সবার সাথে কথা বলে।
+           এটা হলো loose coupling ❤️
+           এটাই DIP ✅
 
 
 
