@@ -2509,6 +2509,58 @@ Laravel এ কোথায় use হয়?
 
 
 
+Factory Pattern : আমরা সাধারণত একটা class এর object (new লিখে ) সরাসরি বানিয়ে কাজ করি। কিন্তু Factory Pattern এর concept হল এই object বানানোর কাজ টা অন্য কোনো method দিয়ে করা। সরাসরি object তৈরী না করা। 
+
+উদাহরণ :
+interface Toy {
+    public function play();
+}
+
+class ToyCar implements Toy {
+    public function play() {
+        echo "Playing with a 🚗 Car<br>";
+    }
+}
+
+class ToyDrone implements Toy {
+    public function play() {
+        echo "Playing with a 🛸 Drone<br>";
+    }
+}
+
+
+class ToyFactory {
+    public static function make($type): Toy {
+        if ($type == 'car') {
+            return new ToyCar();
+        } elseif ($type == 'drone') {
+            return new ToyDrone();
+        } else {
+            throw new Exception("Unknown toy type");
+        }
+    }
+}
+
+
+$toy1 = ToyFactory::make('car');
+$toy1->play(); // Output: Playing with a 🚗 Car
+
+$toy2 = ToyFactory::make('drone');
+$toy2->play(); // Output: Playing with a 🛸 Drone
+
+এখানে আমরা ToyFactory এর make method টা ব্যবহার করেছি object তৈরী করার জন্য। 
+
+ Laravel এ কোথায় use হয়?
+1.Laravel service container (app()->make(...))
+2.Model factory (User::factory())
+3.Database seeder
+4.Notification factory
+5.Queue Job factory
+
+
+
+
+
          
     
         
