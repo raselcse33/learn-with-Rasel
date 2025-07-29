@@ -2558,6 +2558,98 @@ $toy2->play(); // Output: Playing with a 🛸 Drone
 5.Queue Job factory
 
 
+Abstract Factory : Abstract Factory হলো একটি Design Pattern,যা এমন একটি interface বা abstract class তৈরি করে,যার মাধ্যমে আপনি একই "family"-এর একাধিক related object তৈরি করতে পারেন,এবং কোন "family" থেকে object বানানো হবে সেটা নির্ধারণ হয় একটি Factory class দিয়ে।
+একটি Factory থেকে অনেক object বানাও — সব একই family-এর, সব একসাথে।"এই প্যাটার্নেই হয় Abstract Factory
+
+এবার সংজ্ঞার সাথে মিল রেখে একটা উদাহরণ দেয়া  হল। 
+
+১. একটি interface বা abstract class 
+    ThemeFactory interface
+২. আলাদা আলাদা Factory class (Factory Class আসলে একটা ক্লাস, যেটা object তৈরি করার দায়িত্ব নেয়।) থাকবে family অনুযায়ী। 
+   DarkThemeFactory, LightThemeFactory
+৩.related object তৈরি করবে
+  createButton() এবং createInput()
+
+৪ আপনি কোন Factory ব্যবহার করবেন সেটা নির্ধারণ করা। 
+     client code শুধু Factory change function করে
+
+ Interface:
+
+ interface ThemeFactory {
+    public function createButton(): Button;
+    public function createInput(): Input;
+}
+
+Interface:
+
+interface Button {
+    public function render();
+}
+
+interface Input {
+    public function render();
+}
+
+Dark Theme Family:
+
+class DarkButton implements Button {
+    public function render() {
+        echo "🖤 Rendering Dark Button<br>";
+    }
+}
+
+class DarkInput implements Input {
+    public function render() {
+        echo "⬛ Rendering Dark Input<br>";
+    }
+}
+
+class DarkThemeFactory implements ThemeFactory {
+    public function createButton(): Button {
+        return new DarkButton();
+    }
+
+    public function createInput(): Input {
+        return new DarkInput();
+    }
+}
+
+Light Theme Family:
+
+class LightButton implements Button {
+    public function render() {
+        echo "🤍 Rendering Light Button<br>";
+    }
+}
+
+class LightInput implements Input {
+    public function render() {
+        echo "⬜ Rendering Light Input<br>";
+    }
+}
+
+class LightThemeFactory implements ThemeFactory {
+    public function createButton(): Button {
+        return new LightButton();
+    }
+
+    public function createInput(): Input {
+        return new LightInput();
+    }
+}
+
+Client Code:
+
+function renderUI(ThemeFactory $factory) {
+    $button = $factory->createButton();
+    $input = $factory->createInput();
+
+    $button->render();
+    $input->render();
+}
+
+
+
 
 
 
