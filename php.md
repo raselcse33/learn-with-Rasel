@@ -458,3 +458,508 @@ Double Quotes এর ভিতর single  Quotes লিখা যায়।
 ```
 echo "She said, 'Hello!' "; 
 ```
+
+Single Quotes (') 
+                     
+এর ভিতর আমরা ভ্যারিয়েবল লিখতে পারি তবে সেটা ভ্যারিয়েবল এর মত আচরণ করে না। সে ওটাকে একটা sequence characters হিসাবে ধরে। যেমন :
+```
+$name = "John";
+echo 'Hello, $name!';  // Outputs: Hello, $name!
+```
+            
+এখানে লক্ষ করলে দেখা যাবে $name যে একটা ভ্যারিয়েবল এবং এর যে একটা  এসাইন কৃত ভ্যালু আছে, সে কিন্তু ওই ভ্যালু টাকে প্রিন্ট করে নাই।বরং সে নিজেই একটা sequence characters হিসাবে প্রিন্ট হয়েছে। 
+            
+*এটি মাত্র দুটি escape sequences সাপোর্ট করে। 
+\' to include a single quote (like in It's),
+\\ to include a backslash.
+            
+performance এর ক্ষেত্রে এটি Double Quotes এর থেকে faster । কারণ এটিতে  interpolation হয় না  এবং escape sequences কম সাপোর্ট করে। 
+Single Quotes এর ভিতর Double Quotes লিখা যায়। 
+```
+echo 'She said, "Hello!"'; 
+```
+দুইটা স্ট্রিং কে  '.' দ্বারা concate করা হয়।   
+
+## PHP Constants
+আমরা জানি যার মধ্যে ভ্যালু assign করা হয় তাকে ভ্যারিয়েবল বলে। 
+যেমন 
+```
+$name = "খেলা হবে "; 
+```
+এখানে $name একটা ভ্যারিয়েবল যেটা string টাইপ এর ডাটা বা ভ্যালু ধারণ করে।  
+ঠিক তেমনি Constant ও হল একটা special variable যার প্রধান বৈশিষ্ট হল এর মধ্যে কোন ভ্যালু একবার ভ্যালু assign করলে এটা আর পরিবর্তন করা যায় না। 
+নিচে Constant এবং variable নিয়ে আলোচনা করা হল। 
+
+ এটা কে define() অথবা  const দিয়া শুরু করতে হয়। 
+উদাহরণ 
+```
+ define("SITE_NAME", "MyWebsite");
+ ```
+এর মধ্যে একবার ভ্যালু সেট করলে সেটাকে আর changed or redefined করা যায় না । 
+উদাহরণ 
+```
+define("PI", 3.14159); 
+// Trying to change the value
+PI = 3.9; // Error: Cannot reassign a value to a constant
+```
+এখানে যেহেতু PI এর ভ্যালু একবার সেট করা হইয়া গেছে সেহেতু আর চেঞ্জ করা যাবে না। 
+```
+define("GREETING", "Hello, World!"); // Define the constant GREETING
+define("GREETING", "Hi, World!"); // Error: GREETING has already been defined
+```
+এখানে একবার GREETING define করা হয়ে গেছে সেহেতু পরে আর define করা যাবে না। দুটি উদাহরণ প্রায় একই। 
+এটা uppercase letters দিয়া লিখতে হয়। 
+নরমাল ভ্যারিয়েবল এর মত এর $ sign দরকার হয় না। 
+PHP তে এরকম অনেক magic constant আছে। যেটা আগে থেকেই predefine করা। নিচে details দেয়া হল 
+লিঙ্ক : https://www.w3schools.com/php/php_magic_constants.asp
+
+ ## PHP Operators
+PHP তে Operators বলতে বুঝায় কিছু  symbol বা keyword (keyword বলতে এখানে reserve keyword বুঝানো হয়েছে।  
+যেমন if ,else ইত্যাদি  ). যেটা ব্যবহার হয় variableবা value এর উপর। বিভিন্ন রকম action  ঘটানোর জন্য। 
+এখানে action বলতে বুঝানো হচ্ছে কিছু একটা করা যেমন : যোগ করা ,comapare করা ,ইত্যাদি।  
+
+```
+Arithmetic operators (+,  -,  *,  /,  %)
+Assignment operators (=, += , -=, *= , /= , %=)
+Comparison operators (== , === , < ,> ,!= , <= ,>= ,)
+Increment/Decrement operators (++$x , $x++ ,--$x , $x--)
+Logical operators(&& , ।। ,!)
+String operators (. use to concate string )
+Array operators (+ , == , === , != ,)
+Conditional assignment operators (Ternary Operator ?:  ,  Null Coalescing Operator ?? )
+Null coalescing operator : এই operator টা ব্যবহার হয় যে ভ্যারিয়েবল এর ভ্যালু আছে কিনা চেক করার জন্য। 
+```
+
+## PHP if Statements
+PHP IF  statement সাধারণত ব্যবহার করা condtion চেক করার ক্ষেত্রে। condtion যখন true হয়।  
+তখন ওই condition এর ভিতর code টুকু রান হয়। নিচে উদাহরন দেয়া হল 
+উদাহরণ 
+```
+if (condition) {
+    // Code to run if the condition is true
+}
+```
+একে সংক্ষিপ্ত ভাবে ternary অপারেটর দিয়ে প্রকাশ করা যায়। মোট কথা হল ternary operator হচ্ছে if statement এর  short form যাকে shorthand if বলা হয়।
+ উদাহরণ 
+``` 
+$variable = (condition) ? value_if_true : value_if_false;
+
+$age = 20;
+$status = ($age >= 18) ? "adult" : "minor";
+echo $status; // Outputs: adult  
+```
+একের অধিক condition চেক করার জন্য। if elseif ব্যবহার করা হয়। switch Statement দিয়েও multiple condition check করা হয়। নিচে switch Statement উদাহরণ দেয়া হল।
+
+উদাহরণ :
+```
+$fruit = "apple";
+switch ($fruit) {
+    case "banana":
+        echo "This is a banana.";
+        break;
+    case "apple":
+        echo "This is an apple.";
+        break;
+    case "orange":
+        echo "This is an orange.";
+        break;
+    default:
+        echo "Unknown fruit.";
+}
+```
+
+## PHP Loop
+
+Loop ও এক প্রকার connditional statement .এটি একটি কাজ বা বার বার করে (প্রোগ্রামিং এর ভাষায় : কোড এর একটি নির্দিষ্ট block বার বার excute করে ) 
+যতক্ষণ না condtion টা false হচ্ছে। php তে চার প্রকার loop আছে , while Loop,do-while Loop,for Loop,foreach Loop
+
+while Loop 
+
+```
+$count = 1;
+while ($count <= 5) {
+    echo "Count is: $count <br>";
+    $count++; // Increases $count by 1 each time
+}
+```
+
+do-while Loop 
+
+```
+$count = 1;
+do {
+    echo "Count is: $count <br>";
+    $count++;
+} while ($count <= 5);
+```
+তবে while Loop এবং do-while Loop এর মধ্যে একটা পার্থক্য আছে। সেটা হলো while Loop প্রথমে condition  check করে ,
+এরপর  condtion true হলে সে ওই কোড টুকু excute করে। 
+ওপর দিকে  do-while Loop প্রথমে একবার কোড excute করে then condition check করে। 
+
+for Loop
+```
+for ($i = 1; $i <= 5; $i++) {
+    echo "Number: $i <br>";
+}
+```
+
+Step-by-Step Execution
+Let's go through each iteration to see what happens.
+
+First Iteration:
+
+Initialization: $i = 1
+Condition: $i <= 5 (true, since 1 <= 5)
+Execute Code: echo "Number: 1 <br>"; // Output: Number: 1
+Increment: $i++ makes $i = 2
+Second Iteration:
+
+Condition: $i <= 5 (true, since 2 <= 5)
+Execute Code: echo "Number: 2 <br>"; // Output: Number: 2
+Increment: $i++ makes $i = 3
+Third Iteration:
+
+Condition: $i <= 5 (true, since 3 <= 5)
+Execute Code: echo "Number: 3 <br>"; // Output: Number: 3
+Increment: $i++ makes $i = 4
+Fourth Iteration:
+
+Condition: $i <= 5 (true, since 4 <= 5)
+Execute Code: echo "Number: 4 <br>"; // Output: Number: 4
+Increment: $i++ makes $i = 5
+Fifth Iteration:
+
+Condition: $i <= 5 (true, since 5 <= 5)
+Execute Code: echo "Number: 5 <br>"; // Output: Number: 5
+Increment: $i++ makes $i = 6
+Sixth Iteration:
+
+Condition: $i <= 5 (false, since 6 > 5)
+Since the condition is now false, the loop stops, and PHP moves on to the next part of the code.
+
+foreach Loop : foreach Loop টা specially array ক্ষেত্রে ব্যবহার হয়। এটা দ্বারা array এর প্রতিটা এলিমেন্ট একটা একটা করে access করা যায়     
+Break Statement : Break Statement টা ব্যবহার করা হয় কোনো loop কে তাৎক্ষণিক ভাবে exit বা শেষ করার জন্য,
+যদিও লুপ এর condition true . একটা উদাহরণ দিলে আরো ভালো বুঝা যাবে।
+
+```
+$count = 1;
+while ($count <= 10) {
+    echo "Count is: $count <br>";
+    if ($count == 5) {
+        break; // Stop the loop when $count is 5
+    }
+    $count++;
+}
+```
+
+এখানে while loop টা  $count  এর মান যতক্ষণ , ১০ এর থেকে ছোট বা সমান  থাকবে ততক্ষন ভিতরের কোড টুকু excute করার কথা। 
+কিন্তু loop এর ভিতর আরেকটা  condition use করা হয়েছে। যখন ওই condition true হবে তখন break statement  কোড টাকে exit করে দিবে ,
+যদিও loop এর condition এখনো true ।এটাই হল ব্র্যাক statement কাজ  
+
+### Continue 
+continue statement সাধারণত ব্যবহার করা হয়  কোনো একটা loop ( চক্র ) কে স্কিপ করার জন্য ।
+এবং ওই loop (চক্র) কে স্কিপ করে পরবর্তী যে চক্র বা লুপ আছে ওইটা continue করে। 
+কিন্তু break এর মত পুরো loop টাকে exit করে দেয় না। নিচে উদাহরণ দেয়া হল। 
+
+```
+for ($i = 1; $i <= 5; $i++) {
+    if ($i == 3) {
+        continue; // $i = 3 হলে এই iteration (একটি পূর্ণ চক্র ) টি স্কিপ হবে
+    }
+    echo "Number: $i <br>";
+}
+```
+আউটপুট 
+Number: 1
+Number: 2
+Number: 4
+Number: 5
+এখানে যখন $i  = 3 এই condition টা সত্য হয়েছে তখন ওই চক্র বা loop টিকে skip করা হয়েছে। এবং পরবর্তী যে loop বা চক্র টি আছে ঐটাকে Continue করা হয়েছে। 
+[ এখানে আমি চক্র বলতে যেটা বুঝতে চেয়েছে সেটা হল। $i = 1; $i <= 5; $i++ এর মানে এখানে ৫ টা চক্র বা loop সম্পন্ন হবে কারণ condition দেয়া আছে $i <= 5; মানে $i এর 5 এর বড় হবে না। 
+আমরা জানি loop মানে কোন কোড এর একটি নির্দিষ্ট block বার বার excute করে যতক্ষণ না condtion টা false হচ্ছে।  ]
+
+## PHP Function
+
+php function হচ্ছে code এর ভিতর একটা নির্দিষ্ট block যেটা একটা নির্দিষ্ট কাজের জন্য ব্যবহার হয়। 
+
+[code হচ্ছে একটা instructions (নির্দেশনা) বা command যেটা কোনো programming language লেখা হয় ,
+ যাতে করে কম্পিউটার ওই instructions অনুযায়ি কাজ করতে পারে (excution করতে পারে )।
+আমরা জানি code লেখা হয় programming ল্যাঙ্গুয়েজে দিয়ে। প্রত্যেক single লাইন code কোনো না কোনো কাজের নির্দেশনা দেয় computer কে  যে তুমি এটা কর , 
+তখন compute ওই কাজ টা করে এবং আমরা তার রেজাল্ট টা দেখতে পাই। 
+মোটকথা computer এর সাথে commnucation একটা মাধ্যম হল কোড [ (programming ল্যাঙ্গুয়েজে) . 
+অন্য ভাবে বললে programming language এর লিখিত রূপ হল কোড].
+
+example
+
+```
+<?php
+echo "Hello, World!";
+?>
+```
+এখানে কোড instructions দিচ্ছে computer কে তুমি Hello, World! টেক্সট টা screen শো কর। 
+
+function এর ব্যবহার করার অনেক গুলো উপকার আছে। 
+
+Reusability (বার বার ব্যবহার করা যায়। )
+Organization (সুগঠিত )
+Maintainability (সহজে রক্ষণাবেক্ষণযোগ্যতা , যেহেতু একটা নির্দিষ্ট কাজের জন্য ব্যবহার হয়, সেহেতু খুব সহজে রক্ষণাবেক্ষণ করা যায়।একটু ডিটেলস বললে যেহেতু একটা function 
+বার বার বেবহার হতে পারে কোড এর ভিন্ন ভিন্ন জায়গা থেকে , সেহেতু আমি যদি শুধু ওই function টাতে কোন পরিবর্তন আনি ,তাহলে এই পরিবর্তন সব জায়গাতেই পরবে। অর্থাৎ যারা যারা এই function call করছে।)
+
+উদাহরণ (function):
+
+```
+<?php
+function sayHello() {
+    echo "Hello, World!";
+}
+
+// Calling the function
+sayHello(); // Outputs: Hello, World!
+?>
+```
+function লেখার নিয়ম হচ্ছে সাধারণত  function নাম দিযে function লেখা শুরু করতে হয়। এবং function এর একটা নাম দিতে হবে। 
+sayHello হল function এর নাম এবং এর আগে function কথাটি লিখা হয়েছে । function এর ভিতরের code কে exction করতে হলে এটাকে call করতে। 
+কারণ call ছাড়া এটা একা একা  exction হয় না। 
+
+Parameters: Inputs to make functions flexible
+
+```
+function greet($name) {
+    echo "Hello, $name!";
+}
+greet("Alice");
+```
+Return Values: Get results back from functions.  
+
+```
+function add($a, $b) {
+    return $a + $b;
+}
+$sum = add(5, 3);
+```
+                    
+Default Parameters: Provide default values for parameters
+
+```
+function greet($name = "Guest") {
+    echo "Hello, $name!";
+}
+```
+
+PHP বিভিন্ন ধরণের function রয়েছে নিচে আলোচনা করা হল 
+
+User-Defined Functions : কোনো User যখন তার নির্দিষ্ট কাজের জন্য কোনো function তৈরী করে তখন তাকে User-Defined Functions বলে। 
+                                 
+উধাহরন
+
+```
+<?php
+function greet() {
+    echo "Hello, World!";
+}
+greet(); 
+?>
+```
+
+Built-in Functions : Built-in Functions হল আগের থেকে define বা তৈরী  করা function যেটার কোনো পরিবর্তন বা modification করা যাবে না। 
+শুধু ব্যবহার করা যাবে।php তে এরকম অনেক Built-in Functions রয়েছে কাজকে সহজ করার জন্য 
+উধাহরন
+
+```
+echo round(4.6); // Outputs: 5
+round একটা Built-in Functions যেটা সব সময় neares integer velue দেয়  
+```
+
+Anonymous Functions (Closures) : Anonymous Functions কে Closures function বলা। এই function এর কোনো নাম থাকে না। এটি সাধারণত 
+ব্যবহার হয়  inline functions or assigned to variables জন্য। এবার আসি inline functions কি   
+inline functions বলতে সহজে যেটা বলা যায় সেটা হল। এটি একটি ছোট function বা  temporary functions বলা যেতে পারে , 
+যেটা immediately কোনো একটা কাজ সম্পন্ন করার জন্য ব্যবহার  করা হয় এবং ওরকম কোন plan থাকে না যে এটাকে আবার reuse করবো । 
+
+example:
+Inline function to square a number
+
+```
+$square = function($number) {
+    return $number * $number;
+};
+echo $square(4); // Output: 16
+```
+
+explain: Here, $square(4) means you are calling the anonymous function stored in $square and 
+passing 4 as the value for the parameter $number. ["function is stored," it means that the function is assigned to a variable.]   
+
+
+assigned to variables বলতে আমরা বুজি কোনো একটা ভ্যারিয়েবল এর ভিতর ভ্যালু এসাইন করা, সিম্পল ভাবে এটাই বুজি। 
+যেমন $x = "১০";
+এখানে $x ভ্যারিয়েবল আর ১০ হল ভ্যালু। 
+আমরা Anonymous Functions কেউ ভ্যারিয়েবল এর ভিতর এসাইন করতে পারি।     
+finally আমরা বলতে পারি  ছোট এবং immediately কোনো টাস্ক সম্পন্ন করার জন্য এবং যে টাস্ক টা আমাদের বার বার use করার দরকার পরবে না। এরকম কোন কাজ করার জন্য আমাদের Anonymous Functions ব্যবহার করা হয়। এরফলে আমাদের ঘটা করে কোনো function এর নাম দিয়ে নতুন করে কোনো function লিখতে হয় না। 
+ফলে এটা আমাদের কোড short হয়।     
+                                        
+Anonymous Functions এর আরেকটা মজার দিক রইছে।সেটা হল Local Scope . Scope নিয়ে আগে আলোচনা করা হয়েছে ,হালকা ভাবে বললে স্কোপ মানে accessible 
+area . অর্থাৎ কাকে কোন কোন জায়গা থেকে access করা যাবে। Local Scope হচ্ছে এটাকে যেখানে declured করা হয়েছে শুধু ঐখানে একে এক্সেস করা যাবে। একটা 
+উধাহরন দিলে সহজ হবে। 
+
+```
+$name = "Alice";
+$sayHello = function() use ($name) { // Captures $name from outside
+    echo "Hello, $name";
+};
+$sayHello(); // Output: Hello, Alice
+```
+
+
+এখানে $name একটা variable যেটা function এর বাহিরে declured করা হয়েছে। ফলে এটাকে  function এর ভিতর থেকে access করা যাবে না এবং access করতে গেলে একটা error দিবে . 
+একে function এর বাহির থেকেই কেবল  access করতে হবে। কিন্তু Anonymous Functions  "use " কীওয়ার্ড ব্যবহার করে এই ভ্যারিয়েবল টাকে 
+function এর ভিতরে ও ব্যবহার করতে পারে। মজার না। জটিল জিনিস।  
+
+Arrow function: arrow function ও Anonymous Function এর  মতো অনেকটা। এটাও একটা inline functions,এই function এর কোনো নাম থাকে 
+না ,এবং এটাকেও variable assign করা যায়, এবং দুটো function ই ব্যবহার হয় ছোট task এর জন্য। তবে এর মধ্যে কিছু পার্থক্য আছে। 
+নিচে একটা উদাহরণ দেওয়া হল arrow function এর। 
+
+```
+<?php
+$c = 0; // outer scope variable
+$sum = fn($a, $b) => $a + $b + $c;
+echo $sum(5, 10); // Output: 15  
+php?> 
+```
+
+ফীচার                                    Arrow function                           
+
+1.Syntax                              fn  keyword ব্যবহার করা হয়। 
+2.Return                              এই খানে return দরকার পরে না অটোমেটিক ভাবে result return হয়। 
+
+3.Outer Scope Variables               outer scope variable access করার জন্য কোনো keyword দরকার পরে না। অটোমেটিক ভাবেই access করা যায়। 
+4.Introduced in PHP                   PHP 7.4
+5.code cmplexcity                     Can not handle multiple lines of code
+
+
+
+
+ফীচার                                    Anonymous Function                            
+
+1.Syntax                              function  keyword ব্যবহার করা হয়।  
+2.Return                              function এর ভিতর result পাওয়ার জন্য return  ব্যবহার করা হয়।                 
+
+3.Outer Scope Variables               outer scope variable access করার জন্য use keyword ব্যবহার করা হয়
+4.Introduced in PHP                   PHP 5.3
+5.code cmplexcity                     Can  handle multiple lines of code
+
+
+Recursive Functions (call) :Recursive Functions  হল এমন একটি প্রসেস, যেখানে একটি ফাঙ্কশন নিজেই নিজেকে কল করে।
+একটি ফাঙ্কশন নিজেই নিজেকে পুনরায় কল করে, এবং এই প্রক্রিয়াটিকে Recursive Call বলা হয়।এবং এখানে দুটি পার্ট থাকে একটা base case (যেখানে ফাঙ্কশনটি থামবে,বা অন্য কিছু।  ) 
+আরেকটা হলো recursive case (যেখানে recursion নিজেকে কল করে) 
+
+ নিচে উদাহরণ দেয়া হলো 
+
+```
+function countdown($number) {
+if ($number <= 0) { // Base case
+    return;
+}
+echo $number . "\n"; // Print the current number
+countdown($number - 1); // Recursive call
+}
+
+countdown(5);
+```
+
+## Array
+Array হলো এমন একটা ভ্যারিয়েবল যেখানে  multiple ভ্যালু assign করা যায়। এবং সেই ভ্যালু গুলোকে index এর মাধ্যমে এক্সেস করা যায়। 
+example
+
+```
+<?php
+$fruits = array("Apple", "Banana", "Orange");  // This is an array
+echo $fruits[0];  // Outputs: Apple (first item in the array)
+?>
+```
+
+Type of Array:
+
+Indexed Arrays: Arrays with numeric keys (starting from 0).
+Associative Arrays: Arrays with custom string keys.
+Multidimensional Arrays: Arrays containing other arrays.
+
+
+Indexed Arrays : Indexed Arrays  তে  integer key ব্যবহার করা হয়। এবং এটা auto generate যদি manually assign না করা হয়। 
+Example: 
+
+```
+<?php
+$fruits = ["apple", "banana", "orange"]; // Indexed array
+
+echo $fruits[0]; // Outputs: apple
+echo $fruits[1]; 
+?>
+```
+
+Associative Arrays : Associative Arrays তে সাধারণত string key ব্যবহার করা হয় ,তবে integer key ও ব্যবহার করা যায়, এখানে ইচ্ছা মতো কীয় ব্যবহার করা যায়।
+
+```
+$associativeArray = [
+"name" => "Alice", // String key
+42 => "Meaning of life", // Integer key
+"city" => "Paris"
+    ];
+echo $associativeArray["name"]; // Outputs: Alice
+echo $associativeArray[42];  
+?>
+```
+
+               
+main পার্থক্য টা হলো Indexed Arrays কীয় সবসময় integer ,এবং এটা auto genarate .ওপর দিকে Associative Arrays key string অথবা integer .( তবে fully customize )
+USES : Indexed Arrays ব্যবহার করা  sequential data (like a list or collection) store করার জন্য. 
+আর Associative Arrays বেবহার করা হয় meaningful keys সহ ডাটা store করার জন্য। 
+Key  : যেহেতু array তে আমরা multiple ভ্যালু রাখি ,সেহেতু spacific ভাবে ওই ভ্যালু গুলোকে ধরার জন্য আমরা Key এর আন্ডার রাখি এটাই হলো Key .   
+
+Multidimensional arrays : Multidimensional arrays বলতে বুঝায় যেখানে একটা array তার ভ্যালু হিসাবে array রাখে। 
+আমরা জানি array এমন একটা ডাটা টাইপ বা ভ্যারিয়েবল  যেখানে  একাধিক ভ্যালু assign করা যায়। 
+আর Multidimensional arrays তে ঐ ভ্যালু হিসাবে array assign করা হয়। নিচে example দেওয়া হল। 
+
+Types of Multidimensional Arrays
+Two-Dimensional Array:  (array যেখানে প্রত্যেকটা ভ্যালু আরেকটা array )    
+Three-Dimensional Array: (array যেখানে প্রত্যেকটা ভ্যালু two-dimensional array) 
+N-Dimensional Array:  (Arrays with more nested levels)
+
+
+Two-Dimensional Array : Two-Dimensional Array হলো একটা multiple array , যেটা row এবং column মতো আচরণ করে। একটা উদাহরণ দেওয়া হল। 
+
+```
+$products = [   ["Laptop", 1200, 5],["Smartphone", 800, 10],["Tablet", 400, 7]   ];
+```
+
+               
+এটা একটা Two-Dimensional Array . কারণ এখানে $products একটা main array ,এবং এর মধ্যে যে ভ্যালু গুলো assign  আছে, সেগুলো ও এক একটা array . 
+এবার আসি এটা কিভাবে  row এবং column মতো আচরণ করে। এখানে main Array টা হচ্ছে row এবং এর ভিতর যে ভ্যালু হিসাবে array গুলো আছে সেগুলো হচ্ছে column . অর্থাঃ 
+               
+```               
+$products = [   
+
+["Laptop",        1200,                5],             =======> first row (0 index)
+    ।                ।                  ।
+    ।                ।                  ।
+(1r  ,1c  )     (1r ,2c )       (1r ,3c )
+(0 index)      (1 index)     (3 index)
+
+
+
+["Smartphone",         800,          10],    =======> second  row (1 index)
+
+    ।                    ।                  ।
+    ।                    ।                  ।
+(2r  ,1c  )         (2r ,2c )       (2r ,3c )
+
+(0 index)           (1 index)     (3 index)
+
+
+["Tablet",        400,             7]                 =======> third  row (2 index)
+
+    ।                ।               ।
+    ।                ।               ।
+(3r  ,1c  )     (3r ,2c )       (3r ,3c )
+(0 index)      (1 index)     (3 index)
+
+];
+```   
