@@ -285,3 +285,176 @@ if (10 > 5) {
 ```
 Function Call as Expression:
 ```$length = strlen("Hello");  // "strlen('Hello')" is an expression that evaluates to 5```
+
+## PHP Data Types
+
+### Data Type
+ Data type বলতে বুঝায় ,একটা ভ্যারিয়েবল কি ধরণের  type of data (value ) hold বা ধারণ করে। 
+
+### PHP has 8 main data types:
+
+### String 
+String হলো একটা sequence of characters (অক্ষরের ক্রম বিনাস।এর মানে হলো প্রত্যেকটা character এর পর  আরেকটা character সাজানো থাকে। 
+যেমন "CAT" এখানে C A এবং T একটা সিকোয়েন্স মেইনটেইন করে একটার পর একটা রয়েছে। ) 
+যেটা Double Quotes (") এবং Single Quotes (') এর ভিতর লিখা হয়।   
+Characters: Letters (like A, B, C), digits (like 1, 2, 3), and symbols (like @, #, !).   
+এটা লেখার জন্য single quotes (') or double quotes (") ব্যবহার করা হয়।  
+
+### Integer
+Integer বলতে বুঝায় সমস্ত নাম্বার কে (Negativ এন্ড পসিটিভ )। তবে decimal নম্বর ছাড়া।  
+
+### Float (or Double)
+Float (or Double) বলতে আমরা decimal নম্বর কে বুঝি। 
+
+### Boolean 
+Boolean হলো এক ধরণের data Type যেটা true এবং false এই দুই টা state নিয়ে কাজ করে।
+true : (এর অর্থ হলো something are correct or  exit ).
+False : (এর অর্থ হলো  something is incorrect or does not exist).
+
+### When is Boolean Used?
+Boolean সাধারণত ব্যবহার হয় Conditional Statements and Logical and comparison Operations এর ক্ষেত্রে। 
+Conditional Statements : (like if, else) অর্থাৎ যেহেতু এটা true এবং false নিয়ে কাজ করে সেহেতু  block এর ভিতর কোড টুকু কখন  run hobe এটা নির্ধারণ করে । 
+মানে যদি condtion true হয় তখন run করবে other wise করবে না। 
+Logical and comparison Operations (like &&, || , > ,<) to combine or test multiple conditions.
+
+ besic example 
+
+ ```
+<?php
+$is_raining = true;   // This is a boolean value representing 'true'
+$is_sunny = false;    // This is a boolean value representing 'false'
+
+if ($is_raining) {
+    echo "Take an umbrella!";  // This will run because $is_raining is true
+}
+
+if (!$is_sunny) {
+    echo "It's not sunny outside.";  // This will run because $is_sunny is false
+}
+?>
+```
+
+Comparisons example
+
+```
+ <?php
+$a = 10;
+$b = 5;
+
+$is_greater = $a > $b;  // Comparison: 10 is greater than 5, so $is_greater is true
+echo $is_greater;       // Outputs: 1 (because true is displayed as 1 in PHP)
+
+$is_equal = $a == $b;   // Comparison: 10 is not equal to 5, so $is_equal is false
+echo $is_equal;         // Outputs nothing (because false is displayed as empty in PHP)
+?>
+```
+
+### Type Casting 
+Type Casting হলো একটা process যার মাধ্যমে value একটা data type থেকে আরেকটা data type convert হয়।    
+PHP এমন অনেক ভ্যালু আছে যা automatically Booleans data কনভার্ট হয়। নিচে example দেয়া হলো : 
+
+0 (integer zero) and 0.0 (float zero) are false.
+Empty strings (""), empty arrays ([]), and null are false.
+All other values (non-zero numbers, non-empty strings, non-empty arrays) are true.
+
+```
+<?php
+$value1 = 0;         // 0 is false
+$value2 = "Hello";   // Non-empty string is true
+
+if ($value1) {
+    echo "This is true!";
+} else {
+    echo "This is false!";  // Outputs this because 0 is false
+}
+
+if ($value2) {
+    echo "This is true!";  // Outputs this because non-empty strings are true
+}
+?>
+```
+
+### Array 
+Array হলো এমন একটা ভ্যারিয়েবল যেখানে  multiple ভ্যালু assign করা যায়। এবং সেই ভ্যালু গুলোকে index এর মাধ্যমে এক্সেস করা যায়।             
+example 
+
+```
+<?php
+$fruits = array("Apple", "Banana", "Orange");  // This is an array
+echo $fruits[0];  // Outputs: Apple (first item in the array)
+?>
+```
+
+### Object
+Object হল instance of class . মানে হচ্ছে object হল class এর একটা বাস্তব উদাহরণ। 
+যেমন car যদি একটা class হয় তাহলে এর উদাহরণ বা instance হলো Toyota .   
+class : class হল একটা প্ল্যান জাস্ট plan . যেমন (car ,এর color থাকবে ,brand থাকবে একটা প্ল্যান ) .
+object : object হল ঐ প্ল্যান বা class  এর একটা real উদাহরণ তৈরী করা। যেমন (car এর color রেড হবে , এবং ব্র্যান্ড টা Toyota হবে ) .
+এরকম আরো multiple  উদাহরণ বা object তৈরী করা যায় একটা ক্লাস থেকে । 
+
+```
+class Car {
+    public $color;
+    public $model;
+}
+
+// Creating an instance of the Car class
+$myCar = new Car();  // This is an instance (or object) of the Car class
+$myCar->color = "Blue";
+$myCar->model = "Toyota";
+
+$myNewCar = new Car();  // multiple object 
+$myNewCar->color = "red";
+$myNewCar->model = "Tesla";
+```
+
+### NULL
+NULL হচ্ছে  একটা special  ভ্যালু যেটা represents করে no-value অথবা empty । 
+তাই কোনো ভ্যারিয়েবল কে null ভ্যালু এসাইন করা মানে হলো ঐ ভ্যারিয়েবল টা empty অথবা স্পষ্টভাবে কোনো ভ্যালু এসাইন করা নাই।
+সহজ ভাবে বলতে গেলে Declaring without a value.তবে এখানে একটা কথা থাকে 
+
+$car;
+$car2 = NULL;
+এখানে দুই টা ভেরিএবলে আছে যার প্রথমটা শুধু একটা ভ্যারিয়েবল declured করা আছে যার কোনো ভ্যালু নেই। 
+এবং দ্বিতীয়টা একটা special null ভ্যালু assign করা আছে যার অর্থ এর ও কোনো স্পষ্টভাবে ভ্যালু এসাইন করা নাই।  তাহলে কি দুই টা একই। 
+
+$car;
+PHP জানে যে $car  কোডে উল্লেখ করা হয়েছে , কিন্তু এটা এখন ও একটা initialized variable এর মত আচরণ করে না। 
+initialized variable এর মানে হলো variable টাতে intial ভ্যালু (প্রাথমিক ভাবে বা প্রথম বার যে ভ্যালু  assign করা হয়। )  
+assign করা হয়েছে। মূলকথা হল $car  যেহেতু কোডে লিখা হয়েছে সেহেতু এটা exit করতেসে কিন্তু PHP একে কোনো memory allocation অর্থাৎ memory তে কোনো জায়গা বরাদ্দ রাখে না। 
+
+$car2 = NULL
+এখানে $car2 variable  একটা special ভ্যালু declured করেছে। এবং এটা  initialized ও হয়েছে  এবং memory allocation হয়েছে তবে সেটা সর্বনিন্ম। 
+
+### Resource 
+Resource হচ্ছে PHP এর একটা special ডাটা টাইপ যেটা external resource নিয়ে কাজ করে। 
+external resource মানে হচ্ছে PHP Program এর বাহিরে যে কোনো data টাইপ অথবা service, যেটাকে PHP program থেকে accessed করা যাবে। 
+যেমন Databases,file ,API .  
+example 
+```
+$connection = mysqli_connect("localhost", "username", "password", "database");
+এখানে $connection একটা variable যার মধ্যে database  করা হয়েছে।  
+```
+
+## PHP Strings Details
+
+এর আগে আমরা string টাইপ নিয়ে আলোচনা হয়েছে। এখানে আমরা string এর ডিটেলস নিয়ে অলোচোনা করবো। 
+আমরা জানি string টাইপ এর ডাটা বা  ভ্যালু  Double Quotes (") এবং Single Quotes (') এর ভিতর লিখা হয়। 
+তবে লিখা হলেও এই Double Quotes (") এবং Single Quotes (') এর ভিতর রয়েছে পার্থক্য। 
+
+Double Quotes : 
+                     
+এর প্রথম যে বৈশিষ্ট সেটা হলো Double Quotes এর ভিতর আমরা ভ্যারিয়েবল লিখতে পারি। 
+এবং সেটা ভ্যারিয়েবল এর মত আচরণ করে।আর এই কথাটাকে ইংলিশ বলে (interpolated).  
+একটা উদাহরণ দিলে আরো সহজ হবে। 
+```
+$name = "John";
+echo "Hello, $name!"; // Outputs: Hello, John!
+```
+এটি অনেক escape sequences সাপোর্ট করে। (escape sequences হল combination  of special character) .
+            
+performance এর ক্ষেত্রে এটি Single Quotes এর থেকে slow  ।            
+Double Quotes এর ভিতর single  Quotes লিখা যায়। 
+```
+echo "She said, 'Hello!' "; 
+```
