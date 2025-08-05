@@ -149,3 +149,29 @@ echo $name;
 myFunction();  // Outputs: John
 echo $name;    // Error: $name is not accessible outside the function
 ```
+
+### Global Scope 
+Global Scope বা ভ্যারিয়েবল হলো,ফাঙ্কশন এর বাহিরে যে কোনো variable কে Global Scope বা Global variable বলে। 
+এটা function ভিতর ছাড়া script যে কোনো জায়গা থেকে এক্সেস করা যায় 
+
+```<?php
+$name = "Alice";  // Global variable
+
+function myFunction() {
+    echo $name;  // Error: Cannot access the global variable directly inside a function
+}
+
+myFunction();  // Will produce an error
+?>```
+
+তবে যদি আপনি ওই variable কে ফাঙ্কশন এর ভিতর থেকে এক্সেস করতে চান তাহলে global keyword use করতে হবে নিচে উদাহরণ দেয়া হলো  
+```<?php
+$name = "Alice";  // Global variable
+
+function myFunction() {
+    global $name;  // Use the global keyword to access the global variable
+    echo $name;    // Outputs: Alice
+}
+
+myFunction();
+?>```
