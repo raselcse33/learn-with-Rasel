@@ -107,3 +107,44 @@ This is a multi-line comment
 It spans across multiple lines
 */
 ```
+
+## **********Variable*********
+
+### variable
+যেখানে value assign করা থাকে 
+var_dump() function এর মাধ্যমে আমরা variable টাইপ জানতে পারি .
+
+### loosely typed language : 
+PHP হল loosely typed language. এর মানে এখানে ভ্যারিয়েবল declured করার সময় বলার প্রয়জন হয় না যে ইটা কোন টাইপ এর ভ্যারিয়েবল ,
+ভ্যালু দেখেই সে বুজে ফেলে যে ইটা কোন টাইপ ভ্যারিয়েবল। 
+```example : $number = 5; [এর মানে এটা হলো interger টাইপ এর ভ্যারিয়েবল ] .```
+````$number = "PHP " [এর মানে এটা হলো string  টাইপ এর ভ্যারিয়েবল ] .```
+কিন্তু java ল্যাঙ্গুয়েজে এর ক্ষেত্রে আপনাকে vareable টাইপ declure করে দিতে হয়। 
+```example :  int number = 5; [এখানে ভ্যারিয়েবল এর আগে int মানে integer কথটা বলে দেয়া হইছে ]```
+
+### Types of Variable 
+String
+Integer
+Float (floating point numbers - also called double)
+Boolean
+Array
+Object
+NULL
+Resource   
+
+### variable scope 
+variable scope মানে হচ্ছে variable টাকে কোন কোন জায়গা থেকে access করা যাবে। কারণ সব ভ্যারিয়েবল সব জায়গা থেকে access করা যাই না। 
+three main types of variable scope in PHP
+
+### Local Scope
+Local Scope হচ্ছে এই ভ্যারিয়েবল যেখানে declured করা হয়েছে শুধু ঐখানে একে এক্সেস করা যাবে আর একেই Local Scope বলে. 
+এর মানে কোনো  ভ্যারিয়েবল function এর ভিতর declured করলে  কেবলমাত্র ফাঙ্কশন এর ভিতরই access করা যাবে। 
+এর বাহির থেকে এক্সেস করা যাবে না .
+
+```function myFunction() {
+    $name = "John";  // Local variable, only available inside this function
+    echo $name;
+}
+
+myFunction();  // Outputs: John
+echo $name;    // Error: $name is not accessible outside the function```
