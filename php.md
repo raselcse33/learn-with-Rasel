@@ -141,10 +141,11 @@ Local Scope হচ্ছে এই ভ্যারিয়েবল যেখা�
 এর মানে কোনো  ভ্যারিয়েবল function এর ভিতর declured করলে  কেবলমাত্র ফাঙ্কশন এর ভিতরই access করা যাবে। 
 এর বাহির থেকে এক্সেস করা যাবে না .
 
-```function myFunction() {
-    $name = "John";  // Local variable, only available inside this function
-    echo $name;
+```
+function myFunction() {
+$name = "John";  // Local variable, only available inside this function
+echo $name;
 }
-
 myFunction();  // Outputs: John
-echo $name;    // Error: $name is not accessible outside the function```
+echo $name;    // Error: $name is not accessible outside the function
+```
