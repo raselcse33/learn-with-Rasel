@@ -1783,31 +1783,32 @@ Interface-based Polymorphism
 
 ```
 interface Animal {
-        public function makeSound(); // শুধু ঘোষনা
+    public function makeSound(); // শুধু ঘোষনা
+}
+
+class Cat implements Animal {
+    public function makeSound() {
+        echo "Cat says: Meow! 🐱";
     }
+}
 
-    class Cat implements Animal {
-        public function makeSound() {
-            echo "Cat says: Meow! 🐱";
-        }
+class Dog implements Animal {
+    public function makeSound() {
+        echo "Dog says: Woof! 🐶";
     }
+}
 
-    class Dog implements Animal {
-        public function makeSound() {
-            echo "Dog says: Woof! 🐶";
-        }
-    }
+// Function accepts any object that implements Animal
+function playSound(Animal $animal) {
+    $animal->makeSound();
+}
 
-    // Function accepts any object that implements Animal
-    function playSound(Animal $animal) {
-        $animal->makeSound();
-    }
+playSound(new Cat()); // Output: Cat says: Meow!
+playSound(new Dog()); // Output: Dog says: Woof!
+```
 
-    playSound(new Cat()); // Output: Cat says: Meow!
-    playSound(new Dog()); // Output: Dog says: Woof!
-    ```
 
-    
+  
 ব্যাখ্যা:
 interface Animal → contract (চুক্তি): "makeSound" method must exist.
 Cat এবং Dog → আলাদা class, কিন্তু দুইটিই Animal interface follow করে।
