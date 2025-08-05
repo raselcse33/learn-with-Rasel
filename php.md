@@ -1905,9 +1905,12 @@ Polymorphism
 
 Interface vs Class:
 
+```
 বিষয়	                Interface	                                        Class
+
 কী define করে	        শুধুমাত্র method-এর নাম	                               method নাম + কাজ
 properties থাকে?	    ❌ না	                                        ✅ হ্যাঁ
 method body থাকে?	    ❌ না	                                        ✅ হ্যাঁ
 implements / extends	implements দিয়ে implement করতে হয়	            extends দিয়ে inherit করতে হয়
+```
 
