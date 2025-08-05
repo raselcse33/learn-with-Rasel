@@ -1767,6 +1767,8 @@ function playSound(Animal $animal) {
 
 playSound(new Dog()); // Woof!
 playSound(new Cat()); // Meow!
+
+
 ```
 
 এখানে makeSound() মেথড সব ক্লাসেই একই নামে আছে,
@@ -1776,6 +1778,8 @@ Interface-based Polymorphism
 একটা interface থাকে যেখানে কেবল method declaration থাকে (মানে কাজ কী হবে তা বলা থাকে না, শুধু method-এর নাম ও signature থাকে)।
 এরপর এক বা একাধিক class সেই interface implement করে — এবং নিজেদের মতো করে সেই মেথডের কাজ define করে।
 একি method name → ভিন্ন class → ভিন্ন আচরণ → এটাই Polymorphism।
+
+
 
 ```
 interface Animal {
@@ -1802,6 +1806,8 @@ interface Animal {
     playSound(new Cat()); // Output: Cat says: Meow!
     playSound(new Dog()); // Output: Dog says: Woof!
     ```
+
+    
 ব্যাখ্যা:
 interface Animal → contract (চুক্তি): "makeSound" method must exist.
 Cat এবং Dog → আলাদা class, কিন্তু দুইটিই Animal interface follow করে।
@@ -1853,22 +1859,22 @@ Multiple Interface implement
 
 ```
 interface Logger {
-        public function log($msg);
+    public function log($msg);
+}
+
+interface Notifier {
+    public function notify($msg);
+}
+
+class UserActivity implements Logger, Notifier {
+    public function log($msg) {
+        echo "Logging: $msg<br>";
     }
 
-    interface Notifier {
-        public function notify($msg);
+    public function notify($msg) {
+        echo "Notifying: $msg<br>";
     }
-
-    class UserActivity implements Logger, Notifier {
-        public function log($msg) {
-            echo "Logging: $msg<br>";
-        }
-
-        public function notify($msg) {
-            echo "Notifying: $msg<br>";
-        }
-    }
+}
 ```    
 
 
@@ -1889,14 +1895,14 @@ playSound($cat); // Meow!
 এখানে আরেকটা বিষয় আছে সেটা হল। তুমি যদি কোনো interface implements করে class বানাও ,তাহলে ওই implement এর যত গুলো method আছে ,
 সেগুলো ওই class এ অব্যশই add করতে হবে। পাশাপাশি তুমি চাইলে বাড়তি method ও ওই class এ add করতে পারবে |   
              
-🤔 কেন Interface ব্যবহার করি?
-✅ নিয়ম তৈরি করতে	
-✅ Multiple class-এর common behavior নিশ্চিত করতে	
-✅ Dependency Injection / Loose Coupling কোডে flexibility আসে, পরিবর্তন সহজ হয়
-✅ Polymorphism
+কেন Interface ব্যবহার করি?
+নিয়ম তৈরি করতে	
+Multiple class-এর common behavior নিশ্চিত করতে	
+Dependency Injection / Loose Coupling কোডে flexibility আসে, পরিবর্তন সহজ হয়
+Polymorphism
 
 
-⚖️ Interface vs Class:
+Interface vs Class:
 
 বিষয়	                Interface	                                        Class
 কী define করে	        শুধুমাত্র method-এর নাম	                               method নাম + কাজ
