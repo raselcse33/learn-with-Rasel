@@ -177,3 +177,111 @@ function myFunction() {
 myFunction();
 ?>
 ```
+
+
+### Static Scope 
+সাধারণত function এর ভিতর কোনো ভ্যারিয়েবল declured করলে,যখন ওই function টা রান হয় এবং শেষ হয় তখন ওই ভ্যারিয়েবল টা তার ভ্যালু delete করে দেয়। 
+কিন্তু যদি variable এর আগে Static অ্যাড করা হয় তখন ওই ভ্যারিয়েবল টা, 
+function শেষ হলেও ভ্যালু ডিলিট করে না। ওটা রেখে দেয়। এবং পর্বতিটিতে যখন ওই function টা কল হয় তখন ওই ভ্যারিয়েবল টা ওই ভ্যালু টা মনে রাখে।   
+example
+```    
+<?php
+function myFunction() {
+    $count = 0;  // This is a regular variable
+    $count++;
+    echo $count;
+}
+
+myFunction();  // Outputs: 1
+myFunction();  // Outputs: 1
+myFunction();  // Outputs: 1
+?>
+```
+**Simple Example without Static:
+```
+<?php
+function myFunction() {
+    $count = 0;  // This is a regular variable
+    $count++;
+    echo $count;
+}
+
+myFunction();  // Outputs: 1
+myFunction();  // Outputs: 1
+myFunction();  // Outputs: 1
+?>
+```
+**Example with Static:  
+```
+?php
+function myFunction() {
+    static $count = 0;  // This is a static variable
+    $count++;
+    echo $count;
+}
+
+myFunction();  // Outputs: 1
+myFunction();  // Outputs: 2
+myFunction();  // Outputs: 3
+?>
+```
+
+## Echo/Print
+
+echo এবং print দুই টাই আউটপুট show করানোর জন্য ব্যবহার হয়। তবে এদের মধ্যে কিসু পার্থক্য রয়েছে। 
+
+### echo 
+echo কোনো ভ্যালু রিটার্ন করে না। এটা সিম্পলি আউটপুট শো করে। 
+echo print এর থেকে ফাস্ট কারণ এটা কোনো ভ্যালু রিটার্ন করে না। 
+
+### print 
+print ভ্যালু ১ রিটার্ন করে। এবং এটা expressions এর জন্য ব্যবহার হয়।  
+example 
+
+```
+<?php
+if (print("Hello")) {
+    echo " - The print function returned 1, so this message is shown.";
+}
+?>
+```
+এখানে print("Hello") এর মানে হলো এটা একটা স্ট্রিং hellow প্রিন্ট করছে এবং  1 ভ্যালু রিটার্ন করে কারণ আমরা জানি  প্রিন্ট সবসময় 1 রিটার্ন করে। 
+যেহেতু প্রিন্ট ১ রিটার্ন করে সেহেতু condtion টা true . সেহেতু condition এর ভিতর কোড টুকু excute হবে। এখান থেকে জানা গেলো প্রিন্ট সবসময় 1 রিটার্ন করে। 
+এবং এটা expressions জন্য বেবহার হয়। 
+   
+### why 1 is True
+php তে 1 সবসময় true হিসাবে ব্যবহার  হয়। এবং 0 false হিসাবে ব্যবহার হয়। 
+    example 
+```
+<?php
+if (1) {
+    echo "This will be executed because 1 is true.";
+}
+
+if (0) {
+    echo "This will NOT be executed because 0 is false.";
+}
+?>   
+```
+
+### expressions 
+expressions হলো value ,variable ,operator and function এর একটা combination যেটা একটা রেজাল্ট তৈরী  করে (সিঙ্গেল value ) .
+
+```example : $x = 5 + 3;  // "5 + 3" is an expression that evaluates to 8 ```
+
+Expression with Variables
+```
+$a = 5;
+$b = 3;
+$result = $a * $b;  // "$a * $b" is an expression that evaluates to 15
+```
+
+Expression with Condition
+
+```
+if (10 > 5) {
+    echo "Yes";  // "10 > 5" is an expression that evaluates to true
+}
+```
+Function Call as Expression:
+```$length = strlen("Hello");  // "strlen('Hello')" is an expression that evaluates to 5```
