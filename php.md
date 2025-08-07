@@ -2070,3 +2070,7 @@ user->log('ok')
 user->notify('ok')
 ```
 এখানে Logger এবং Printer দুইটা trait . এবং User একটা class যে একাধিক trait use করতে পারতেছে, subclass যেভাবে parentClass extends করে। 
+
+
+
+
