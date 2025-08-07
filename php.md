@@ -1972,15 +1972,15 @@ $cat->makeSound();    // Cat says: Meow!
 ### তুলনামূলক চার্ট (Interface vs Abstract Class):
 
 ```
-বিষয়	                                      Interface	                                 Abstract Class
-👉 কী	                                     সম্পূর্ণ design	                            আধা design + কিছু কাজ
-👉 object create করা যায়?	                 না ❌	                                    না ❌
-👉 Constructor থাকে?	                         না ❌	                                    হ্যাঁ ✅
-👉 Property/Variable define করা যায়?	         না ❌	                                    হ্যাঁ ✅
-👉 Method implement করা যায়?	                 না ❌	                                    হ্যাঁ ✅
-👉 Multiple implement?	                     হ্যাঁ ✅ (many interface)	                   না ❌ (একটিই class extend করা যায়)
-👉 সব method override বাধ্যতামূলক?	          হ্যাঁ ✅	                                    না ❌ (শুধু abstract method-ই বাধ্যতামূলক)
-👉 Access modifier (public/protected/private) সব method public হয়	                     সব ধরনের modifier ব্যবহার করা যায়
-👉 Use case	                                 Contract/Standard define	                  Common logic reuse + structure
+বিষয়	                                           Interface	                                       Abstract Class
+👉 কী	                                           সম্পূর্ণ design	                                      আধা design + কিছু কাজ
+👉 object create করা যায়?	                       না ❌	                                              না ❌
+👉 Constructor থাকে?	                           না ❌	                                              হ্যাঁ ✅
+👉 Property/Variable define করা যায়?	           না ❌	                                              হ্যাঁ ✅
+👉 Method implement করা যায়?	                   না ❌	                                              হ্যাঁ ✅
+👉 Multiple implement?	                           হ্যাঁ ✅ (many interface)	                             না ❌ (একটিই class extend করা যায়)
+👉 সব method override বাধ্যতামূলক?	                হ্যাঁ ✅	                                              না ❌ (শুধু abstract method-ই বাধ্যতামূলক)
+👉 Access modifier (public/protected/private)     সব method public হয়	                               সব ধরনের modifier ব্যবহার করা যায়
+👉 Use case	                                      Contract/Standard define	                            Common logic reuse + structure
 ```
 
