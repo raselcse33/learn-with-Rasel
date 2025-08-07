@@ -1984,3 +1984,89 @@ $cat->makeSound();    // Cat says: Meow!
 👉 Use case	                                      Contract/Standard define	                            Common logic reuse + structure
 ```
 
+
+## Traits 
+Trait হলো PHP-র একটি special feature, যেটা ব্যবহার করা হয় code reuse (একই কোড বারবার লেখার ঝামেলা থেকে বাঁচতে)।
+PHP-তে একটা class শুধু একটিই parent class extend করতে পারে (single inheritance)। এটা PHP একটা সীমাবদ্, আর এই সীমাবদ্ধ দূর করার জন্য Trait ব্যবহার করা হয়। 
+কারণ একটা class একাধিক trait use করতে পারে। 
+
+উদাহরণ : 
+
+```
+// Trait তৈরি করা
+trait Printer {
+    public function printData($data) {
+        echo "Printing: $data<br>";
+    }
+}
+
+// class এ trait ব্যবহার করা
+class Invoice {
+    use Printer;
+}
+
+class Report {
+    use Printer;
+}
+
+$inv = new Invoice();
+$inv->printData("Invoice #101");
+
+$rep = new Report();
+$rep->printData("Monthly Report");
+```
+
+
+
+single inheritance সীমাবদ্ধ কিভাবে Trait এর মাধ্যমে দূর হল :
+আমরা জানি PHP single inheritance অর্থাৎ  PHP-তে একটা class শুধু একটিই parent class extend করতে পারে, multiple parent class 
+extend করতে পারে না। 
+একটা উদাহরণ দিয়া বুজানো হল 
+
+```
+Class Logger {
+    public function log($msg) {
+        echo "Log: $msg<br>";
+    }
+}
+
+Class Printer {
+    public function print($msg) {
+        echo "Print: $msg<br>";
+    }
+}
+
+class User extends Logger, Printer  {
+
+}
+```
+
+এখানে দুইটা Class, Logger এবং Printer, User হচ্ছে একটা subclass যেটা  Logger এবং Printer কে extends করেছে। কিন্তু এইটা error দিবে 
+কারণ একটা subclass একাধিক class কে extends করতে পারে না। PHP তে একটা subclass কেবল একটা parent class কে extends করতে 
+পারে। 
+এবার আসি Trait কিভাবে এই সীমাবদ্ধ দূর করলো। একটা উদাহরণ দিলে বুজতে ভালো হবে 
+
+উদাহরণ 
+
+```
+trait Logger {
+    public function log($msg) {
+        echo "Log: $msg<br>";
+    }
+}
+
+trait Notifier {
+    public function notify($msg) {
+        echo "Notify: $msg<br>";
+    }
+}
+
+class User {
+    use Logger, Notifier;
+}
+
+$user = new User
+user->log('ok')
+user->notify('ok')
+```
+এখানে Logger এবং Printer দুইটা trait . এবং User একটা class যে একাধিক trait use করতে পারতেছে, subclass যেভাবে parentClass extends করে। 
