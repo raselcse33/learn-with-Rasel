@@ -2072,5 +2072,126 @@ user->notify('ok')
 এখানে Logger এবং Printer দুইটা trait . এবং User একটা class যে একাধিক trait use করতে পারতেছে, subclass যেভাবে parentClass extends করে। 
 
 
+## Static Keyword 
+আমরা জানি কোনো class এর method বা property access করতে হলে। ওই class এর object এর মাধ্যমে করতে হয়। কিন্তু 
+কোন class এর method বা property তে Static Keyword use করলে তাকে object ছাড়াই,সরাসরি class দিয়া access করা যায়। 
+নিচে একটা উদাহরণ দেয়া হল 
+
+```
+class MathHelper {
+public static $pi = 3.1416;
+
+public static function square($n) {
+return $n * $n;
+}
+}
+
+// Object ছাড়াই ব্যবহার:
+echo MathHelper::$pi;             // Output: 3.1416
+echo MathHelper::square(5);       // Output: 25
+```
+
+কেন ব্যবহার করবো?
+
+```
+দরকার	                                                                                  কারণ
+✅ Common value রাখতে	                                                                 যেমন pi, VAT, siteName
+✅ Utility functions (Helper function )	                                                 যেমন Helper::formatDate()
+```
+
+## Final Keyword 
+সাধারণত php তে একটা subclass parent class কে extends করতে পারে এবং চাইলে  তার method কে override করতে পারে। 
+এই কাজ টা যেন না করতে পারে এর জন্য Final Keyword বেবহার করা হয়। একটা উদাহরণ দেয়া হল। 
+
+উদাহরণ ১: final class 
+
+```
+final class Bank {
+public function withdraw() {
+    echo "Withdraw successful";
+}
+}
+// class SonaliBank extends Bank {}  // Final class extend করা যাবে না
+```
+
+উদাহরণ ২: final method
+
+```
+class Animal {
+    final public function eat() {
+        echo "Eating food";
+    }
+}
+
+class Dog extends Animal {
+    
+    // public function eat() {}  // final method override করা যাবে না
+}
+```
+
+কেন ব্যবহার করবো?
+
+```
+দরকার	                                                 কারণ
+✅ Security	                                            কেউ subclass-এ ভুল করে override করে না
+✅ Control	                                             Core method কেউ না পাল্টায়  
+```
+## Type Hinting 
+PHP-তে Type Hinting মূলত function/method-এর parameter এবং return type-এর ক্ষেত্রেই ব্যবহৃত হয়। 
+এর কাজ হল function/method-এর parameter এবং return type টা কি typer হবে ,অর্থাৎ [int ,string ,ইত্যাদি ]
+
+### কোথায় কোথায় Type Hinting করা যায়?
+
+```
+কোথায়	                                                           কীভাবে	                                                                         উদাহরণ
+1️⃣ Function Parameter	                                            টাইপ দিয়ে নির্দিষ্ট করা                                                               function add(int $a, int $b)
+2️⃣ Function Return Type	                                        : type দিয়ে	                                                                      function getName(): string
+3️⃣ Constructor Injection (OOP)                                     ক্লাস টাইপ hint	                                                                   __construct(Logger $logger)
+4️⃣ Closure (anonymous function)	                                Arrow function বা normal	                                                      function (int $id): string
+```
+
+উদাহরণ:
+Parameter Type Hinting : 
+
+```
+<!-- function এর perameter টা string হবে  -->
+function greet(string $name) {
+echo "Hello, $name!";
+}
+```
+
+Return Type Hinting
+
+```
+<!-- এখানে রিটার্ন type টা intger হবে , যেটা :int  হিসাবে বলা আছে  -->
+    function add(int $a, int $b): int {
+    return $a + $b;
+}
+```
+
+Object/Class টাইপ Hinting
+
+```
+class User {
+    public function greet() {
+        echo "Hi!";
+    }
+}
+
+<!-- এখানে welcome function এর ভিতর perameter হিসাবে কেবল User এর অবজেক্ট ই pass করা যাবে। অন্য কিছু যাবে না   -->
+function welcome(User $user) {
+    $user->greet();
+}
+
+<!-- এটা error দিবে  -->
+$animal = new Animal();  
+welcome($animal);  
+
+<!-- আবার কাজ করবে  -->
+$animal = new User();  
+welcome($animal);  
+```
+
+
 
 
