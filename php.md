@@ -2192,6 +2192,88 @@ $animal = new User();
 welcome($animal);  
 ```
 
+## Exception Handling 
+
+যখন কোডে কোনো ভুল (Error) হয় —তখন PHP যেন চিৎকার করে বন্ধ হয়ে না যায়, বরং শান্তভাবে ভুলটাকে ধরে ফেলতে পারে এবং তুমি ইচ্ছামতো তা হ্যান্ডেল করতে পারো। 
+Exception Handling হচ্ছে সেই "ব্রেক" — যেটা দিয়ে তোমার কোড ভুল হলেও থেমে যায় না, সুন্দরভাবে হ্যান্ডেল করে।   
+
+কেন ব্যবহার করা হয়?
+
+```
+কারণ	                                                  ব্যাখ্যা
+✅ কোড ভেঙে না পড়ে	                                    Error হলে Program বন্ধ না হয়ে graceful ভাবে চলতে পারে
+✅ Error Message দেখা যায়	                              কোন Error হলো তা ধরতে পারি
+✅ Custom Message/Action	                                  তুমি নিজেই ঠিক করতে পারো, error হলে কী হবে
+✅ বড় প্রজেক্টে Safe                                         কোড	User কে সুন্দরভাবে ভুল বোঝানো যায়    
+```
+
+উদাহরণ 
+
+```
+try {
+
+$result = 10 / 0;
+echo $result;
+} catch (Throwable $e) {  
+    <!-- যদি Error হয়, তাহলে এখানে আসবে | এটাই হল error Handling  -->
+    echo "❌ সমস্যা হয়েছে: " . $e->getMessage();
+}
+```
+
+Exception Handling এর গঠন : 
+
+```
+try {
+    // যেটা try করা হচ্ছে
+} catch (ExceptionType $e) {
+    // error হলে এখানে আসে
+} finally {
+    // সবশেষে যা হোক চলবেই (চাইলে)
+}
+```
+
+কোড
+
+```
+function divide($a, $b) {
+    try {
+        if ($b == 0) {
+            <!-- throw করে exception তৈরি মানে হল এইখানে একটা সমস্যা (error) হয়েছে — এটা উপরে পাঠাও, যেন catch করতে পারি। 
+            এই সমস্যার মেসেজ  টা আমি আমার মত করে customize করতে পারছি  -->
+            throw new Exception("0 দিয়ে ভাগ করা যায় না!");
+        }
+
+        $result = $a / $b;
+        echo "ফলাফল: $result <br>";
+    } catch (Exception $e) {
+        echo "❌ Error: " . $e->getMessage() . "<br>";
+    } finally {
+        echo "✅ ধন্যবাদ! Divide করার চেষ্টা শেষ।<br><br>";
+    }
+}
+
+Output হবে:
+
+ফলাফল: 5
+✅ ধন্যবাদ! Divide করার চেষ্টা শেষ।
+
+❌ Error: 0 দিয়ে ভাগ করা যায় না!
+✅ ধন্যবাদ! Divide করার চেষ্টা শেষ।
+```
+
+Line by Line ব্যাখ্যা:
+```
+অংশ	                                                                  কী করছে
+try {}                                                                 এখানে মূল ভাগ করার কাজ করা হচ্ছে
+if ($b == 0)	                                                       যদি ভাগের সংখ্যা 0 হয়, তাহলে throw করে exception তৈরি
+catch (Exception $e)	                                               এখানে error ধরা হচ্ছে এবং মেসেজ দেখানো হচ্ছে
+finally {}	                                                           এটা সবসময়ই চলবে — error হোক বা না হোক
+
+// উদাহরণ
+divide(10, 2);   // ঠিক আছে
+divide(5, 0);    // Error হবে
+```
+
 
 
 
