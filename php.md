@@ -1,4 +1,4 @@
-<img src="https://avatars.githubusercontent.com/u/39871958?s=400&u=253973374165c894d25a1807ae20263d30dec9c5&v=4" alt="LinkedIn"></a>
+
 
 <h1 align="center">Hi 👋, I'm Rasel Munshi</h1>
 <h3 align="center">A Passionate Fullstack Developer from Bangladesh</h3>
