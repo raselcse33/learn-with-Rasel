@@ -5,8 +5,6 @@
 
 # PHP Topics Start
 
-## *********** PHP Introduction *********
-
 ### ✅ Scripting Language
 স্ক্রিপ্টিং ল্যাঙ্গুয়েজে হচ্ছে এক প্রকার প্রোগ্রামিং ল্যাঙ্গুয়েজে যেটা  compilation ছাড়াই execute হয়।  
 **Example:**
