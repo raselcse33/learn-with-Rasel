@@ -128,13 +128,21 @@ PHP হল loosely typed language. এর মানে এখানে ভ্য
 ```example :  int number = 5; [এখানে ভ্যারিয়েবল এর আগে int মানে integer কথটা বলে দেয়া হইছে ]```
 
 ### Types of Variable 
+
 String
+
 Integer
+
 Float (floating point numbers - also called double)
+
 Boolean
+
 Array
+
 Object
+
 NULL
+
 Resource   
 
 ### variable scope 
