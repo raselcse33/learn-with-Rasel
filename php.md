@@ -3697,6 +3697,86 @@ Rasel received message: আগামীকাল পরীক্ষা হবে
 Rahim received message: আগামীকাল পরীক্ষা হবে!
 ```
 
+## State
+একটা নির্দিষ্ট কাজ করার জন্য বিভিন্ন রকম অ্যালগরিদম বা কৌশল। এবং এই বিভিন্ন অ্যালগরিদম বা কৌশল একে অপর থেকে আলাদা থাকে। এবং কাজ টা runtime-এ (চালানোর সময়) যেকোনো অ্যালগরিদম বা কৌশল বা strategy বেছে নিয়ে  করা। 
+
+সহজ ভাবে বললে 
+কাজ একটাই, কিন্তু করার অনেকগুলো উপায়।
+এই উপায়গুলো আলাদা আলাদা Strategy Class আকারে থাকে। 
+
+ধরুন আপনি একটা Payment System বানাচ্ছেন।
+
+কেউ PayPal দিয়ে দিতে চায়
+কেউ Stripe দিয়ে দিতে চায়
+কেউ আবার Bkash দিয়ে দিতে চায়
+👉 Payment করার মূল কাজ একটাই → টাকা পাঠানো
+কিন্তু কোন method দিয়ে পাঠাবে সেটা আলাদা।
+
+এখন যদি সবকিছু এক class-এ লিখে ফেলেন → কোড অনেক জটিল হয়ে যাবে।
+তার বদলে প্রতিটি payment method আলাদা Strategy Class হবে।
+
+
+### উদাহরণ
+
+```
+<?php
+// Strategy Interface
+interface PaymentStrategy {
+    public function pay($amount);
+}
+
+// Concrete Strategies
+class PayPalPayment implements PaymentStrategy {
+    public function pay($amount) {
+        echo "Paying $amount using PayPal<br>";
+    }
+}
+
+class StripePayment implements PaymentStrategy {
+    public function pay($amount) {
+        echo "Paying $amount using Stripe<br>";
+    }
+}
+
+class BkashPayment implements PaymentStrategy {
+    public function pay($amount) {
+        echo "Paying $amount using Bkash<br>";
+    }
+}
+
+// Context Class
+class PaymentContext {
+    private $strategy;
+
+    // এখানে যেকোনো strategy ঢোকানো যাবে
+    public function __construct(PaymentStrategy $strategy) {
+        $this->strategy = $strategy;
+    }
+
+    public function checkout($amount) {
+        $this->strategy->pay($amount);
+    }
+}
+
+// ব্যবহার:
+$paypal = new PaymentContext(new PayPalPayment());
+$paypal->checkout(500);
+
+$stripe = new PaymentContext(new StripePayment());
+$stripe->checkout(800);
+
+$bkash = new PaymentContext(new BkashPayment());
+$bkash->checkout(200);
+```
+
+### Output
+
+```
+Paying 500 using PayPal
+Paying 800 using Stripe
+Paying 200 using Bkash
+```
+
 
 
 
