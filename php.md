@@ -3595,8 +3595,107 @@ Folder: My Drive
 ```
 
 
+## Observer Pattern
+Observer Pattern হলো এমন একটা ডিজাইন প্যাটার্ন,
+যেখানে একটা অবজেক্ট (Subject)-এ কোনো পরিবর্তন হলে,
+তার সাথে যুক্ত থাকা অনেকগুলো অবজেক্ট (Observers)-কে স্বয়ংক্রিয়ভাবে জানানো হয়।
+
+এটি এমনভাবে কাজ করে যে, যখন একটি অবজেক্টের অবস্থা (state) পরিবর্তিত হয়, তখন স্বয়ংক্রিয়ভাবে এর উপর নির্ভরশীল সব অবজেক্টকে জানিয়ে দেওয়া হয়, কিন্তু সেই অবজেক্টগুলো একে অপরের সম্পর্কে কিছু জানে না।
+
+মানে 
+একজন শিক্ষক (Subject) ক্লাসে ঢুকে বললেন "আজ পরীক্ষা হবে"।
+সব ছাত্র (Observers) সেই মেসেজটা শুনে ফেলল।
+শিক্ষক আলাদা আলাদা করে প্রত্যেক ছাত্রকে বলেননি।
 
 
+### Observer Pattern এর প্রধান অংশ
+
+1️⃣ Subject (বা Publisher)
+
+যেটা change/event তৈরি করে।
+এর কাজ হলো observer-দের list মেইনটেইন করা, আর পরিবর্তন হলে তাদের জানানো।
+Method সাধারণত থাকে:
+attach(observer) → observer যোগ করা
+detach(observer) → observer বাদ দেওয়া
+notify() → সবাইকে জানানো
+
+
+2️⃣ Observer
+যারা সেই change/event শুনবে।
+Subject তাদেরকে notify করলে, observer তাদের নিজস্ব কাজ করবে।
+Method সাধারণত থাকে:
+update($message) → Subject থেকে আসা মেসেজ হ্যান্ডেল করা
+
+
+
+3️⃣ Concrete Subject & Concrete Observers
+
+Concrete Subject → আসল class, যেখানে আসলে state change হয় (যেমন: Teacher)।
+Concrete Observer → আসল class, যারা notify পায় (যেমন: Student)।
+
+### ছোট্ট Flow
+
+Subject event ঘটায় (যেমন: Teacher → “পরীক্ষা হবে”)
+Subject → notify() চালায়
+Observer-রা update() method দিয়ে মেসেজ পায়
+
+
+### সহজ PHP উদাহরণ:
+
+```
+<?php
+// Observer Interface
+interface Observer {
+    public function update($message);
+}
+
+// Subject Class
+class Teacher {
+    private $observers = [];
+
+    public function attach(Observer $observer) {
+        $this->observers[] = $observer;
+    }
+
+    public function notify($message) {
+        foreach ($this->observers as $observer) {
+            $observer->update($message);
+        }
+    }
+}
+
+// Concrete Observers (Students)
+class Student implements Observer {
+    private $name;
+
+    public function __construct($name) {
+        $this->name = $name;
+    }
+
+    public function update($message) {
+        echo $this->name . " received message: " . $message . "<br>";
+    }
+}
+
+// ব্যবহার
+$teacher = new Teacher();
+
+$student1 = new Student("Rasel");
+$student2 = new Student("Rahim");
+
+$teacher->attach($student1);
+$teacher->attach($student2);
+
+// শিক্ষক সবাইকে জানালেন
+$teacher->notify("আগামীকাল পরীক্ষা হবে!");
+```
+
+### Output
+
+```
+Rasel received message: আগামীকাল পরীক্ষা হবে!
+Rahim received message: আগামীকাল পরীক্ষা হবে!
+```
 
 
 
