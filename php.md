@@ -3476,6 +3476,123 @@ Order placed successfully!
 
 এই উদাহরণে, ক্লায়েন্টকে ইনভেন্টরি, পেমেন্ট, বা শিপিং ক্লাস সম্পর্কে জানতে হচ্ছে না। সে শুধু OrderFacade ক্লাসের placeOrder() মেথডটি কল করে পুরো কাজটি সম্পন্ন করতে পারছে। এটিই Facade প্যাটার্নের মূল উদ্দেশ্য।
 
+## Composite Pattern
+
+কম্পোজিট প্যাটার্ন এমন একটি কৌশল যা আপনাকে একটি একক জিনিস এবং অনেকগুলো জিনিসের একটি গ্রুপকে একই পদ্ধতিতে ব্যবহার করতে সাহায্য করে। এর মূল উদ্দেশ্য হলো: আপনি একক জিনিস এবং গ্রুপ উভয়কেই একই নামে বা একই কমান্ড দিয়ে নিয়ন্ত্রণ করতে পারবেন।
+
+একটি বাস্তব জীবনের উদাহরণ দিয়ে বুঝি। ধরুন আপনার কম্পিউটার বা মোবাইলে একটি ফাইল সিস্টেম আছে।
+
+এখানে একটি একক ফাইল (যেমন, photo.jpg) আছে।
+
+আবার একটি ফোল্ডারও (যেমন, My_Pictures) আছে, যার ভিতরে অনেকগুলো ফাইল এবং ফোল্ডার থাকতে পারে।
+
+আপনি যদি একটি ফাইল ওপেন করতে চান, আপনি open() কমান্ড ব্যবহার করেন। আবার, আপনি যদি একটি ফোল্ডারের ভেতরকার সবকিছু দেখতে চান, আপনি একই open() কমান্ড ব্যবহার করতে পারেন। ফাইল এবং ফোল্ডার দুটি ভিন্ন ধরনের জিনিস হলেও আপনি তাদের সাথে একই ধরনের আচরণ করতে পারছেন।
+
+কম্পোজিট প্যাটার্ন এই লজিকটিই ব্যবহার করে। এটি একটি সাধারণ কাঠামো (যেমন, FileComponent) তৈরি করে যা উভয়কেই (ফাইল এবং ফোল্ডার) ধারণ করে।
+
+### মূল অংশগুলো:
+
+কম্পোনেন্ট (Component): এটি হলো সেই সাধারণ কাঠামো, যা বলে দেয় যে ফাইল এবং ফোল্ডার উভয়েরই কী কী ক্ষমতা থাকতে হবে। আমাদের উদাহরণে, এটি হলো FileComponent ইন্টারফেস যার একটি মেথড আছে, যেমন display(), যা ফাইল এবং ফোল্ডার উভয়কেই কিছু তথ্য দেখাবে।
+
+পাতা (Leaf): এটি হলো সবচেয়ে মৌলিক উপাদান। এটি একটি একক ফাইল, যার কোনো শিশু উপাদান নেই। যেমন, TextFile বা ImageFile।
+
+গ্রুপ (Composite): এটি হলো একটি গ্রুপ অবজেক্ট যা শিশু উপাদান ধারণ করে। এটি একটি ফোল্ডারের মতো, যার ভেতরে অন্যান্য ফাইল এবং ফোল্ডার থাকতে পারে। যেমন, Folder ক্লাস।
+
+
+### কেন এই প্যাটার্নটি দরকার?
+যদি আপনার কম্পোজিট প্যাটার্ন না থাকতো, তাহলে আপনাকে বারবার চেক করতে হতো যে আপনি একটি ফাইল নিয়ে কাজ করছেন নাকি একটি ফোল্ডার নিয়ে।
+
+### উদাহরণ
+
+```
+<?php
+Component (কম্পোনেন্ট): এটি হলো একটি সাধারণ ইন্টারফেস, যা ফাইল এবং ফোল্ডার উভয়ের জন্য একটি সাধারণ কাঠামো সরবরাহ করে। এখানে, এটি হলো FileSystemComponent।
+
+interface FileSystemComponent {
+    public function showDetails(string $indent = "");
+}
+
+
+Leaf (পাতা): এটি হলো সবচেয়ে মৌলিক উপাদান, অর্থাৎ একটি একক ফাইল। এর ভেতরে কোনো শিশু উপাদান নেই।
+
+class File implements FileSystemComponent {
+    private $name;
+
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
+
+    public function showDetails(string $indent = "") {
+        echo $indent . "File44: " . $this->name . "\n";
+    }
+}
+
+
+Composite (কম্পোজিট): এটি হলো একটি গ্রুপ যা অন্য ফাইল বা ফোল্ডার ধারণ করতে পারে। এটি একটি ফোল্ডারের মতো কাজ করে।
+
+class Folder implements FileSystemComponent {
+    private $name;
+    private $components = [];
+
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
+
+    public function add(FileSystemComponent $component) {
+        $this->components[] = $component;
+    }
+
+    public function showDetails(string $indent = "") {
+      
+    
+
+        echo $indent . "Folder: " . $this->name . "\n";
+        $newIndent = $indent . "  "; //Indentation for sub-items
+      
+        foreach ($this->components as $component) {
+            $component->showDetails($newIndent);
+        }
+    }
+}
+
+ব্যবহার (ক্লায়েন্ট কোড)
+এবার দেখুন, কীভাবে একটি মাত্র কমান্ড দিয়ে আমরা পুরো কাঠামোটি নিয়ন্ত্রণ করতে পারি।
+
+
+// ফাইল তৈরি করি
+$file1 = new File("resume.pdf");
+$file2 = new File("photo.jpg");
+$file3 = new File("document.txt");
+
+// ফোল্ডার তৈরি করি
+$documentsFolder = new Folder("Documents");
+$imagesFolder = new Folder("Images");
+
+// ফোল্ডারের মধ্যে ফাইল যুক্ত করি
+$documentsFolder->add($file1);
+$imagesFolder->add($file2);
+
+// মূল ফোল্ডার তৈরি করি
+$myDrive = new Folder("My Drive");
+
+// মূল ফোল্ডারে ফাইল এবং ফোল্ডার উভয়ই যুক্ত করি
+$myDrive->add($documentsFolder);
+$myDrive->add($imagesFolder);
+$myDrive->add($file3); // এখানে একটি একক ফাইল যুক্ত করা হয়েছে
+
+// পুরো ফাইল সিস্টেমটি একটি মাত্র কমান্ড দিয়ে প্রদর্শন করি
+$myDrive->showDetails();
+?>
+
+
+output:
+Folder: My Drive
+  Folder: Documents
+    File44: resume.pdf
+  Folder: Images
+    File44: photo.jpg
+  File44: document.txt
+```
 
 
 
