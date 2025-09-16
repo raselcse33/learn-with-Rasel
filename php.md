@@ -3777,6 +3777,141 @@ Paying 800 using Stripe
 Paying 200 using Bkash
 ```
 
+## Command Pattern
+
+Command Pattern হলো এমন একটা Design Pattern,
+যেখানে কোনো action (কাজ করার নির্দেশ) কে আমরা একটা আলাদা object আকারে রাখি।
+মানে, কাজ সরাসরি না করে —
+“কী কাজ হবে” আর “কে করবে” আলাদা করে ফেলা হয়।
+
+ধরুন আপনি রেস্টুরেন্টে গেলেন 🍔
+
+ওয়েটারকে বললেন → “আমাকে একটা বার্গার আনো।”
+ওয়েটার আপনার কথা লিখে রাখল একটা slip (command object) এ।
+ওয়েটার রান্নাঘরে গিয়ে Chef কে দিল।
+Chef slip দেখে কাজ করল।
+
+👉 এখানে কী হলো?
+আপনি (Client) শুধু বললেন কী করতে হবে।
+ওয়েটার (Invoker) slip নিল আর Chef কে দিল।
+Chef (Receiver) আসল কাজটা করল।
+Slip (Command) = কাজ করার নির্দেশ।
+
+### উদাহরণ
+
+```
+<?php
+// কাজের নির্দেশ (Command Interface)
+interface Command {
+    public function execute();
+}
+
+// Receiver (যে আসল কাজটা করে)
+class Light {
+    public function turnOn() {
+        echo "💡 Light is ON<br>";
+    }
+    public function turnOff() {
+        echo "💡 Light is OFF<br>";
+    }
+}
+
+// Concrete Command (Light অন করার জন্য)
+class TurnOnLight implements Command {
+    private $light;
+
+    public function __construct(Light $light) {
+        $this->light = $light;
+    }
+
+    public function execute() {
+        $this->light->turnOn();
+    }
+}
+
+// Concrete Command (Light অফ করার জন্য)
+class TurnOffLight implements Command {
+    private $light;
+
+    public function __construct(Light $light) {
+        $this->light = $light;
+    }
+
+    public function execute() {
+        $this->light->turnOff();
+    }
+}
+
+// Invoker (Remote Control - শুধু বোতাম চাপবে)
+class RemoteControl {
+    private $command;
+
+    public function setCommand(Command $command) {
+        $this->command = $command;
+    }
+
+    public function pressButton() {
+        $this->command->execute();
+    }
+}
+
+// ব্যবহার
+$light = new Light();
+$remote = new RemoteControl();
+
+$remote->setCommand(new TurnOnLight($light));
+$remote->pressButton(); // Output: 💡 Light is ON
+
+$remote->setCommand(new TurnOffLight($light));
+$remote->pressButton(); // Output: 💡 Light is OFF
+```
+
+### "কোনো কাজ করার নির্দেশকে একটা আলাদা object আকারে রাখা" — একদম সহজ করে বুঝাই।
+
+সাধারণ ভাবে
+
+আমরা সাধারণত কাজ করি এভাবে →
+
+```
+$light = new Light();
+$light->turnOn();
+```
+এখানে আমরা সরাসরি বলেছি → Light কে অন করো।
+
+### কিন্তু Command Pattern এ:
+
+আমরা সরাসরি কাজ করব না।
+বরং কাজ করার নির্দেশ আলাদা ক্লাসে লিখে রাখব।
+
+```
+class TurnOnLight implements Command {
+    private $light;
+    public function __construct(Light $light) {
+        $this->light = $light;
+    }
+
+    public function execute() {
+        $this->light->turnOn(); // এখানে আসল কাজ হবে
+    }
+}
+```
+এখন TurnOnLight ক্লাসটা আসলে একটা object যেটা "Light অন করার নির্দেশ" ধরে রাখে।
+
+ব্যবহার করার সময়
+
+```
+$light = new Light();
+$command = new TurnOnLight($light); // 👉 এখানে Command object বানানো হলো
+$command->execute(); // 👉 আসল কাজ হবে
+```
+
+### মূল কথা
+
+আগে আমরা সরাসরি কাজ করতাম → $light->turnOn()
+
+এখন আমরা কাজটাকে একটা object আকারে লিখে রাখলাম → new TurnOnLight($light)
+
+ফলে কাজটা এখনই হোক, পরে হোক, কিউতে যাক → সবকিছু সহজ হয়।
 
 
 
