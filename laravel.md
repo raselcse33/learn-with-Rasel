@@ -1,6 +1,7 @@
 <h1 align="center">Hi 👋, I'm Rasel Munshi</h1>
 <h3 align="center">A Passionate Fullstack Developer from Bangladesh</h3>
 
+
 # Laravel Topics Start
 
 ## Laravel  
@@ -33,6 +34,7 @@ Progressive → ছোট থেকে বড় প্রজেক্টে ব্
 
 Scalable → Queue, Event, Cache, Horizon, Octane ব্যবহার করে বিশাল প্রজেক্ট হ্যান্ডেল করতে পারে।
 
-Community-driven → Laravel এর কমিউনিটি বিশাল 🌍,
+Community-driven → Laravel এর কমিউনিটি বিশাল 
 প্যাকেজ (যেমন Spatie, Laravel Breeze, Jetstream, Livewire) হাজার হাজার পাওয়া যায়।
+
 
