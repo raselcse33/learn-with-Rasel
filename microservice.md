@@ -102,11 +102,10 @@ example:
       - mochta_scheme_service_mysql_data:/var/lib/mysql
     networks:
       - mochta_scheme_service_network
-````
+```
 
 4.PHPMyadmin:PHPMyadmin : PHPMyadmin হল একটা web browsing টুল যার মাধমে আমরা ডাটাবেসে বিভিন্ন রকম query করতে পারি। ম্যানুয়ালি import ,export আরো অনেক কিছু করতে পারি .এর পোর্ট 5002 .
 ```
-  # phpmyadmin service
   mochta_scheme_service_phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: unless-stopped
@@ -121,5 +120,49 @@ example:
     networks:
       - mochta_scheme_service_network
 ```      
+
+## Frontend থেকে যেভাবে connection হয় backend এ 
+
+```
+# API_URL="http://192.168.68.110:7891/api/v1" 
+# API_URL="http://etrade.dls.gov.bd/api/v1"
+# API_URL='http://118.179.149.36:7891/api/v1'
+API_URL="http://192.168.68.101:6692/api/v1"
+
+# FILE_URL="http://192.168.68.110:7891"
+# FILE_URL="http://etrade.dls.gov.bd"
+# FILE_URL='http://118.179.149.36:7891'
+FILE_URL="http://192.168.68.101:6692"
+```
+
+### ডিটেলস
+192.168.68.101
+এটা হচ্ছে আমার প্রাইভেট নেটওয়ার্ক এড্রেস। 
+6692 : এটা হচ্ছে আমার gateway এর হোস্ট পোর্ট ,যার মাধমে আমি এই container এর ভিতর প্রবেশ করবো (80)। 
+
+
+### finally API routing (clean microservice style)
+
+```
+location /api/v1/scheme {
+    proxy_pass http://scheme-service;
+}
+
+location /api/v1/scheme {
+        proxy_pass http://scheme-service;
+        
+        #Rate-Limit applied as below
+        # limit_req zone=perip nodelay;
+        # limit_req_status 429; 
+        
+    }
+```
+
+```
+/api/v1/scheme
+ → scheme-service
+ → mochta_scheme_service_nginx
+ → Laravel
+```
 
 
