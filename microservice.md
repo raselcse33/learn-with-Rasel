@@ -26,7 +26,14 @@ User
  → App (9000 / internal)
  → DB
 ```
-Nginx Gateway এন্ড Service Nginx এদের container  port সবসময় এটাই 
+1.Container এর ভিতরে nginx সাধারণত 80 এ শোনে .
+2.PHP container → php-fpm runs on 9000
+
+এই port:
+❌ browser থেকে access হয় না
+❌ docker ports দিয়ে expose করা হয় না
+✅ শুধু service nginx → php-fpm ব্যবহার করে
+
 
 ## একটা লারাভেল প্রজেক্ট docker করতে গেলে সাধারণত ৩ টা container লাগে। 
 
@@ -44,7 +51,8 @@ Nginx Gateway এন্ড Service Nginx এদের container  port সবস�
 | mochta_scheme_service_db    | mysql   |
   phpMyAdmin = optional
 ```
-1.PHP APP এখানে আমার php কোড থেকে। so এর কোনো পোর্ট নাই। 
+1.PHP app container public port expose করে না,
+কিন্তু internally php-fpm 9000 port এ শোনে।
 
 2.Nginx: হলো এই app নিজস্ব সার্ভার যেটা আমার php কোড কে রান করে। এর পোর্ট হল 5001 (ইচ্ছা মত দেয়া যায়। ) যেমন আমরা 
 php artisan serve --port=8001 এই কম্যান্ড টা ব্যবহার করি,
@@ -104,6 +112,13 @@ example:
       - mochta_scheme_service_network
 ```
 
+container ভিতরে → MySQL সবসময় 3306
+Host থেকে access → 33065
+Laravel .env এ কিন্তু তুমি 3306 ই ব্যবহার করবে, 33065 না
+(এইটা অনেকেই ভুল করে)
+
+
+
 4.PHPMyadmin:PHPMyadmin : PHPMyadmin হল একটা web browsing টুল যার মাধমে আমরা ডাটাবেসে বিভিন্ন রকম query করতে পারি। ম্যানুয়ালি import ,export আরো অনেক কিছু করতে পারি .এর পোর্ট 5002 .
 ```
   mochta_scheme_service_phpmyadmin:
@@ -144,18 +159,21 @@ FILE_URL="http://192.168.68.101:6692"
 ### finally API routing (clean microservice style)
 
 ```
+upstream scheme-service {
+    zone api_endpoints 64k;
+
+	#Load Balancing back-end APIs
+    server mochta_scheme_service_nginx;
+    # server 192.168.50.147:1003;
+
+	# sticky cookie srv_id expires=1h;
+
+}
+
 location /api/v1/scheme {
     proxy_pass http://scheme-service;
 }
 
-location /api/v1/scheme {
-        proxy_pass http://scheme-service;
-        
-        #Rate-Limit applied as below
-        # limit_req zone=perip nodelay;
-        # limit_req_status 429; 
-        
-    }
 ```
 
 ```
@@ -164,5 +182,8 @@ location /api/v1/scheme {
  → mochta_scheme_service_nginx
  → Laravel
 ```
+
+
+
 
 
